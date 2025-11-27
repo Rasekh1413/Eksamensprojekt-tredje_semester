@@ -1,0 +1,182 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\kaspe\\Desktop\\LagerStatusEksamen\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6C3A70BE-E08A-475F-83B4-84F690D3401B}|LagerStatusEksamen\\LagerStatusEksamen.csproj|c:\\users\\kaspe\\desktop\\lagerstatuseksamen\\lagerstatuseksamen\\services\\servicepackagetype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C3A70BE-E08A-475F-83B4-84F690D3401B}|LagerStatusEksamen\\LagerStatusEksamen.csproj|solutionrelative:lagerstatuseksamen\\services\\servicepackagetype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C3A70BE-E08A-475F-83B4-84F690D3401B}|LagerStatusEksamen\\LagerStatusEksamen.csproj|c:\\users\\kaspe\\desktop\\lagerstatuseksamen\\lagerstatuseksamen\\services\\serviceshelf.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C3A70BE-E08A-475F-83B4-84F690D3401B}|LagerStatusEksamen\\LagerStatusEksamen.csproj|solutionrelative:lagerstatuseksamen\\services\\serviceshelf.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C3A70BE-E08A-475F-83B4-84F690D3401B}|LagerStatusEksamen\\LagerStatusEksamen.csproj|c:\\users\\kaspe\\desktop\\lagerstatuseksamen\\lagerstatuseksamen\\interfaces\\iserviceshelf.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C3A70BE-E08A-475F-83B4-84F690D3401B}|LagerStatusEksamen\\LagerStatusEksamen.csproj|solutionrelative:lagerstatuseksamen\\interfaces\\iserviceshelf.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C3A70BE-E08A-475F-83B4-84F690D3401B}|LagerStatusEksamen\\LagerStatusEksamen.csproj|c:\\users\\kaspe\\desktop\\lagerstatuseksamen\\lagerstatuseksamen\\interfaces\\iservicepackagetype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C3A70BE-E08A-475F-83B4-84F690D3401B}|LagerStatusEksamen\\LagerStatusEksamen.csproj|solutionrelative:lagerstatuseksamen\\interfaces\\iservicepackagetype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C3A70BE-E08A-475F-83B4-84F690D3401B}|LagerStatusEksamen\\LagerStatusEksamen.csproj|c:\\users\\kaspe\\desktop\\lagerstatuseksamen\\lagerstatuseksamen\\misc\\secret.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C3A70BE-E08A-475F-83B4-84F690D3401B}|LagerStatusEksamen\\LagerStatusEksamen.csproj|solutionrelative:lagerstatuseksamen\\misc\\secret.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C3A70BE-E08A-475F-83B4-84F690D3401B}|LagerStatusEksamen\\LagerStatusEksamen.csproj|c:\\users\\kaspe\\desktop\\lagerstatuseksamen\\lagerstatuseksamen\\models\\shelf.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C3A70BE-E08A-475F-83B4-84F690D3401B}|LagerStatusEksamen\\LagerStatusEksamen.csproj|solutionrelative:lagerstatuseksamen\\models\\shelf.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C3A70BE-E08A-475F-83B4-84F690D3401B}|LagerStatusEksamen\\LagerStatusEksamen.csproj|c:\\users\\kaspe\\desktop\\lagerstatuseksamen\\lagerstatuseksamen\\models\\datapackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C3A70BE-E08A-475F-83B4-84F690D3401B}|LagerStatusEksamen\\LagerStatusEksamen.csproj|solutionrelative:lagerstatuseksamen\\models\\datapackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C3A70BE-E08A-475F-83B4-84F690D3401B}|LagerStatusEksamen\\LagerStatusEksamen.csproj|c:\\users\\kaspe\\desktop\\lagerstatuseksamen\\lagerstatuseksamen\\models\\packagetype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C3A70BE-E08A-475F-83B4-84F690D3401B}|LagerStatusEksamen\\LagerStatusEksamen.csproj|solutionrelative:lagerstatuseksamen\\models\\packagetype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 266,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ServiceShelf.cs",
+              "DocumentMoniker": "C:\\Users\\kaspe\\Desktop\\LagerStatusEksamen\\LagerStatusEksamen\\Services\\ServiceShelf.cs",
+              "RelativeDocumentMoniker": "LagerStatusEksamen\\Services\\ServiceShelf.cs",
+              "ToolTip": "C:\\Users\\kaspe\\Desktop\\LagerStatusEksamen\\LagerStatusEksamen\\Services\\ServiceShelf.cs",
+              "RelativeToolTip": "LagerStatusEksamen\\Services\\ServiceShelf.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T12:54:52.873Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ServicePackageType.cs",
+              "DocumentMoniker": "C:\\Users\\kaspe\\Desktop\\LagerStatusEksamen\\LagerStatusEksamen\\Services\\ServicePackageType.cs",
+              "RelativeDocumentMoniker": "LagerStatusEksamen\\Services\\ServicePackageType.cs",
+              "ToolTip": "C:\\Users\\kaspe\\Desktop\\LagerStatusEksamen\\LagerStatusEksamen\\Services\\ServicePackageType.cs",
+              "RelativeToolTip": "LagerStatusEksamen\\Services\\ServicePackageType.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T12:54:15.554Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Secret.cs",
+              "DocumentMoniker": "C:\\Users\\kaspe\\Desktop\\LagerStatusEksamen\\LagerStatusEksamen\\Misc\\Secret.cs",
+              "RelativeDocumentMoniker": "LagerStatusEksamen\\Misc\\Secret.cs",
+              "ToolTip": "C:\\Users\\kaspe\\Desktop\\LagerStatusEksamen\\LagerStatusEksamen\\Misc\\Secret.cs",
+              "RelativeToolTip": "LagerStatusEksamen\\Misc\\Secret.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T12:51:44.163Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IServiceShelf.cs",
+              "DocumentMoniker": "C:\\Users\\kaspe\\Desktop\\LagerStatusEksamen\\LagerStatusEksamen\\Interfaces\\IServiceShelf.cs",
+              "RelativeDocumentMoniker": "LagerStatusEksamen\\Interfaces\\IServiceShelf.cs",
+              "ToolTip": "C:\\Users\\kaspe\\Desktop\\LagerStatusEksamen\\LagerStatusEksamen\\Interfaces\\IServiceShelf.cs",
+              "RelativeToolTip": "LagerStatusEksamen\\Interfaces\\IServiceShelf.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T12:23:39.882Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IServicePackageType.cs",
+              "DocumentMoniker": "C:\\Users\\kaspe\\Desktop\\LagerStatusEksamen\\LagerStatusEksamen\\Interfaces\\IServicePackageType.cs",
+              "RelativeDocumentMoniker": "LagerStatusEksamen\\Interfaces\\IServicePackageType.cs",
+              "ToolTip": "C:\\Users\\kaspe\\Desktop\\LagerStatusEksamen\\LagerStatusEksamen\\Interfaces\\IServicePackageType.cs",
+              "RelativeToolTip": "LagerStatusEksamen\\Interfaces\\IServicePackageType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T12:11:19.511Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DataPackage.cs",
+              "DocumentMoniker": "C:\\Users\\kaspe\\Desktop\\LagerStatusEksamen\\LagerStatusEksamen\\Models\\DataPackage.cs",
+              "RelativeDocumentMoniker": "LagerStatusEksamen\\Models\\DataPackage.cs",
+              "ToolTip": "C:\\Users\\kaspe\\Desktop\\LagerStatusEksamen\\LagerStatusEksamen\\Models\\DataPackage.cs",
+              "RelativeToolTip": "LagerStatusEksamen\\Models\\DataPackage.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T12:07:35.521Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Shelf.cs",
+              "DocumentMoniker": "C:\\Users\\kaspe\\Desktop\\LagerStatusEksamen\\LagerStatusEksamen\\Models\\Shelf.cs",
+              "RelativeDocumentMoniker": "LagerStatusEksamen\\Models\\Shelf.cs",
+              "ToolTip": "C:\\Users\\kaspe\\Desktop\\LagerStatusEksamen\\LagerStatusEksamen\\Models\\Shelf.cs",
+              "RelativeToolTip": "LagerStatusEksamen\\Models\\Shelf.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T11:51:35.565Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PackageType.cs",
+              "DocumentMoniker": "C:\\Users\\kaspe\\Desktop\\LagerStatusEksamen\\LagerStatusEksamen\\Models\\PackageType.cs",
+              "RelativeDocumentMoniker": "LagerStatusEksamen\\Models\\PackageType.cs",
+              "ToolTip": "C:\\Users\\kaspe\\Desktop\\LagerStatusEksamen\\LagerStatusEksamen\\Models\\PackageType.cs",
+              "RelativeToolTip": "LagerStatusEksamen\\Models\\PackageType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T11:49:29.687Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            }
+          ]
+        },
+        {
+          "DockedHeight": 134,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
