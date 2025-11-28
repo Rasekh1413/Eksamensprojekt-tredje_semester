@@ -362,3 +362,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /Backend/LagerStatusEksamen/LagerStatusEksamen/Misc/Secret.cs
+/Backend/LagerStatusEksamen/LagerStatusEksamen/Secret.cs
