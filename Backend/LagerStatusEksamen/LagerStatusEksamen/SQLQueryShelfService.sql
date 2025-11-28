@@ -1,0 +1,1 @@
+﻿insert into Shelves(MAC, PackageType, IsStocked) VALUES('178923nf02f', null, 1);
