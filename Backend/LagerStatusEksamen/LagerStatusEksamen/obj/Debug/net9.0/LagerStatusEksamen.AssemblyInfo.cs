@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LagerStatusEksamen")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c8768c92a3b1901bcbf27d25c4c26f3bd6586c22")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+49efadc19f97e8b1b56c2e2bc8266f7ee9114159")]
 [assembly: System.Reflection.AssemblyProductAttribute("LagerStatusEksamen")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LagerStatusEksamen")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
