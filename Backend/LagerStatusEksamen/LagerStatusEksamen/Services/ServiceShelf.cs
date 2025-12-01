@@ -30,7 +30,6 @@ namespace LagerStatusEksamen.Services
                     command.Parameters.AddWithValue("PackageType", shelf.PackageTypeName);
                     command.Parameters.AddWithValue("IsStocked", shelf.IsStocked);
                     connection.Open();
-
                     command.ExecuteNonQuery();
 
                     addedShelf = GetByMAC(shelf.MAC);
@@ -57,7 +56,6 @@ namespace LagerStatusEksamen.Services
                     SqlCommand command = new SqlCommand(deleteSql, connection);
                     command.Parameters.AddWithValue("@MAC", mac);
                     connection.Open();
-
                     command.ExecuteNonQuery();
                 }
                 catch (SqlException ex) { throw ex; }
