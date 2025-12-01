@@ -11,9 +11,9 @@ namespace LagerStatusEksamen.Services
         #region Instances
         private string selectSql = "SELECT * FROM Shelves";
         private string filterBySensorSql = "SELECT * FROM Shelves WHERE MAC = @MAC";
-        private string insertSql = "INSERT INTO Shelves(MAC, PackageType, IsStocked) Values(@MAC, @PackageType, @IsStocked)";
+        private string insertSql = "INSERT INTO Shelves(MAC, PackageTypeName , IsStocked) Values(@MAC, @PackageTypeName , @IsStocked)";
         private string deleteSql = "DELETE FROM Shelves WHERE MAC = @MAC";
-        private string updatePackageSql = "UPDATE Shelves SET PackageType = @PackageType WHERE MAC = @MAC";
+        private string updatePackageSql = "UPDATE Shelves SET PackageTypeName  = @PackageTypeName  WHERE MAC = @MAC";
         private string updateStatusSql = "UPDATE Shelves SET IsStocked = @IsStocked WHERE MAC = @MAC";
         #endregion
 
@@ -27,7 +27,7 @@ namespace LagerStatusEksamen.Services
                 {
                     SqlCommand command = new SqlCommand(insertSql, connection);
                     command.Parameters.AddWithValue("MAC", shelf.MAC);
-                    command.Parameters.AddWithValue("PackageType", shelf.PackageTypeName);
+                    command.Parameters.AddWithValue("PackageTypeName ", shelf.PackageTypeName);
                     command.Parameters.AddWithValue("IsStocked", shelf.IsStocked);
                     connection.Open();
                     command.ExecuteNonQuery();
@@ -78,11 +78,12 @@ namespace LagerStatusEksamen.Services
 
                     while (reader.Read())
                     {
-                        string mac = reader.GetString(0);
-                        string packageType = reader.GetString(1);
-                        bool isStocked = reader.GetBoolean(2);
+                        string mac = reader.GetString(1);
+                        string packageTypeName = reader.GetString(2);
+                        bool isStocked = reader.GetBoolean(0);
 
-                        Shelf shelf = new Shelf(mac, packageType, isStocked);
+
+                        Shelf shelf = new Shelf(mac, packageTypeName, isStocked);
                         shelves.Add(shelf);
                     }
                     reader.Close();
@@ -109,9 +110,9 @@ namespace LagerStatusEksamen.Services
 
                     while (reader.Read())
                     {
-                        string getPackageType = reader.GetString(1);
-                        bool getIsStocked = reader.GetBoolean(2);
-                        shelf = new Shelf(mac, getPackageType, getIsStocked);
+                        string getPackageTypeName = reader.GetString(2);
+                        bool getIsStocked = reader.GetBoolean(0);
+                        shelf = new Shelf(mac, getPackageTypeName, getIsStocked);
                     }
                     reader.Close();
                 }
@@ -132,7 +133,7 @@ namespace LagerStatusEksamen.Services
                 {
                     SqlCommand command = new SqlCommand(updatePackageSql, connection);
                     command.Parameters.AddWithValue("@MAC", mac);
-                    command.Parameters.AddWithValue("@PackageType", type);
+                    command.Parameters.AddWithValue("@PackageTypeName ", type);
                     connection.Open();
                     command.ExecuteNonQuery();
                 }
