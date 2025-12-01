@@ -88,18 +88,17 @@ namespace TestProject
         {
             //Arrange
             IServiceShelf _service = new ServiceShelf();
-            //List<Shelf> _allShelf = _service.GetAll();
-
+          
             //Act
             Shelf s = new Shelf("977r4", "Ruber", true);
+            _service.Add(s);
             string newPTName = "rubber duck";
 
             Shelf? updatesShelf = _service.UpdatePackageType(s.MAC, newPTName);
-            //_service.Delete(s.MAC);
+            _service.Delete(s.MAC);
 
             //Assert
             Assert.AreEqual(updatesShelf.PackageTypeName, newPTName);
-
         }
 
         [TestMethod]
@@ -107,10 +106,10 @@ namespace TestProject
         {
             //Arrange
             IServiceShelf _service = new ServiceShelf();
-            //List<Shelf> _allShelf = _service.GetAll();
 
             //Act
             Shelf s = new Shelf("ofg876", "Ruber", false);
+            _service.Add(s);
             bool newStatus = true;
 
             Shelf? updatesShelf = _service.UpdateStatus(s.MAC, newStatus);
