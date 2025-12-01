@@ -136,7 +136,7 @@ namespace LagerStatusEksamen.Services
                     connection.Open();
                     command.ExecuteNonQuery();
                 }
-                catch(SqlException ex) { throw ex; }
+                catch (SqlException ex) { throw ex; }
                 catch (Exception ex) { throw ex; }
                 finally { connection.Close(); }
                 return shelf;
