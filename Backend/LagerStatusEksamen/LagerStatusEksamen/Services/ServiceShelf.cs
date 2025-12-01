@@ -15,6 +15,12 @@ namespace LagerStatusEksamen.Services
         private string deleteSql = "DELETE FROM Shelves WHERE MAC = @MAC";
         private string updatePackageSql = "UPDATE Shelves SET PackageTypeName  = @PackageTypeName  WHERE MAC = @MAC";
         private string updateStatusSql = "UPDATE Shelves SET IsStocked = @IsStocked WHERE MAC = @MAC";
+        private string _con;
+        #endregion
+
+        #region Constructor
+        public ServiceShelf() { _con = Secret.ConnectionString; }
+        public ServiceShelf(string con) { _con = con; }
         #endregion
 
         #region Methods
