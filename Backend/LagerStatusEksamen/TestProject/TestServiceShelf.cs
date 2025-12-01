@@ -43,7 +43,7 @@ namespace TestProject
             _service.Add(s);
 
             int counterAfter = _allShelf.Count;
-            _service.Delete(s.MAC);
+            //_service.Delete(s.MAC);
 
             //Assert
             Assert.AreEqual(countBefore + 1, counterAfter);
