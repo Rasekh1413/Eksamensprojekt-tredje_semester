@@ -19,15 +19,6 @@ namespace TestProject
             Assert.IsNotNull(_allShelf);
         }
 
-        //[TestMethod]
-        //[ExpectedException(typeof(ArgumentNullException))]
-        //public void TestFailedGetAllShelfs()
-        //{
-        //    //Arrange
-        //    IServiceShelf _service = new ServiceShelf();
-        //    List<Shelf> _allShelf = _service.GetAll();
-        //}
-
         [TestMethod]
         public void TestAddShelf()
         {
@@ -113,6 +104,7 @@ namespace TestProject
             bool newStatus = true;
 
             Shelf? updatesShelf = _service.UpdateStatus(s.MAC, newStatus);
+            _service.Delete(s.MAC);
 
             //Assert
             Assert.AreEqual(updatesShelf.IsStocked, newStatus);
