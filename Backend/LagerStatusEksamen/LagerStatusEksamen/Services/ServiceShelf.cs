@@ -142,6 +142,8 @@ namespace LagerStatusEksamen.Services
                     command.Parameters.AddWithValue("@PackageTypeName ", type);
                     connection.Open();
                     command.ExecuteNonQuery();
+
+                    shelf = GetByMAC(mac);
                 }
                 catch (SqlException ex) { throw ex; }
                 catch (Exception ex) { throw ex; }
@@ -163,6 +165,8 @@ namespace LagerStatusEksamen.Services
                     command.Parameters.AddWithValue("@IsStocked", status);
                     connection.Open();
                     command.ExecuteNonQuery();
+
+                    shelf = GetByMAC(mac);
                 }
                 catch (SqlException ex) { throw ex; }
                 catch (Exception ex) { throw ex; }
