@@ -84,12 +84,7 @@ namespace LagerStatusEksamen.Services
 
                     while (reader.Read())
                     {
-                        string mac = reader.GetString(1);
-                        string packageTypeName = reader.GetString(2);
-                        bool isStocked = reader.GetBoolean(0);
-
-
-                        Shelf shelf = new Shelf(mac, packageTypeName, isStocked);
+                        Shelf shelf = Read(reader);
                         shelves.Add(shelf);
                     }
                     reader.Close();
@@ -114,12 +109,7 @@ namespace LagerStatusEksamen.Services
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
 
-                    if (reader.Read())
-                    {
-                        string getPackageTypeName = reader.GetString(2);
-                        bool getIsStocked = reader.GetBoolean(0);
-                        shelf = new Shelf(mac, getPackageTypeName, getIsStocked);
-                    }
+                    if (reader.Read()) { shelf = Read(reader); }
                     reader.Close();
                 }
                 catch (SqlException ex) { throw ex; }
@@ -173,6 +163,20 @@ namespace LagerStatusEksamen.Services
                 finally { connection.Close(); }
                 return shelf;
             }
+        }
+        #endregion
+
+        #region Helper functions
+        private Shelf Read(SqlDataReader reader)
+        {
+            bool isStocked = reader.GetBoolean(0);
+            string mac = reader.GetString(1);
+            string? packageTypeName;
+            if (reader.IsDBNull(2)) { packageTypeName = null; }
+            else { packageTypeName = reader.GetString(2); }
+            int id = reader.GetInt32(3);
+
+            return new Shelf(mac, packageTypeName, isStocked, id);
         }
         #endregion
     }
