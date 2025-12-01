@@ -25,7 +25,6 @@ namespace TestProject
             //Arrange
             IServiceShelf _service = new ServiceShelf();
 
-
             //Act
             int countBefore = _service.GetAll().Count();
 
