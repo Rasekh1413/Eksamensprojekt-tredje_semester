@@ -114,7 +114,7 @@ namespace LagerStatusEksamen.Services
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
 
-                    while (reader.Read())
+                    if (reader.Read())
                     {
                         string getPackageTypeName = reader.GetString(2);
                         bool getIsStocked = reader.GetBoolean(0);
