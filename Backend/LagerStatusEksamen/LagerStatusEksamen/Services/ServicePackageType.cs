@@ -18,7 +18,6 @@ namespace LagerStatusEksamen.Services
 
             _packageTypes.Add(packageType);
             return packageType;
-            throw new NotImplementedException();
         }
 
 
@@ -47,7 +46,6 @@ namespace LagerStatusEksamen.Services
             existing.Description = packageType.Description;
 
             return existing;
-            throw new NotImplementedException();
         }
 
         public PackageType? Delete(string name)
@@ -58,7 +56,6 @@ namespace LagerStatusEksamen.Services
 
             _packageTypes.Remove(existing);
             return existing;
-            ///  throw new NotImplementedException();
         }
     }
 }
