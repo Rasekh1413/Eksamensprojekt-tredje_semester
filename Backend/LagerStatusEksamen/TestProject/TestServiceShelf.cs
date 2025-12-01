@@ -15,7 +15,6 @@ namespace TestProject
             IServiceShelf _service = new ServiceShelf();
             List<Shelf> _allShelf = _service.GetAll();
 
-
             //Assert
             Assert.IsNotNull(_allShelf);
         }
@@ -34,16 +33,16 @@ namespace TestProject
         {
             //Arrange
             IServiceShelf _service = new ServiceShelf();
-            List<Shelf> _allShelf = _service.GetAll();
+
 
             //Act
-            int countBefore = _allShelf.Count;
+            int countBefore = _service.GetAll().Count();
 
             Shelf s = new Shelf("75515f", "Ruber", true);
             _service.Add(s);
 
-            int counterAfter = _allShelf.Count;
-            //_service.Delete(s.MAC);
+            int counterAfter = _service.GetAll().Count();
+            _service.Delete(s.MAC);
 
             //Assert
             Assert.AreEqual(countBefore + 1, counterAfter);
@@ -60,7 +59,7 @@ namespace TestProject
             _service.Add(sh);
 
             Shelf? foundShelf = _service.GetByMAC(sh.MAC);
-            //_service.Delete(sh.MAC);
+            _service.Delete(sh.MAC);
 
             //Assert
             Assert.AreEqual(sh.MAC, foundShelf.MAC);
@@ -71,19 +70,19 @@ namespace TestProject
         {
             //Arrange
             IServiceShelf _service = new ServiceShelf();
-            List<Shelf> _allShelf = _service.GetAll();
-
+     
             //Act
             Shelf s = new Shelf("0987h", "Ruber", true);
             _service.Add(s);
-            int counterBefore = _allShelf.Count;
+            int counterBefore = _service.GetAll().Count();
 
-            //_service.Delete(s.MAC);
-            int counterAfter = _allShelf.Count;
+            _service.Delete(s.MAC);
+            int counterAfter = _service.GetAll().Count();
 
             //Assert
             Assert.AreEqual(counterBefore - 1, counterAfter);
         }
+
         [TestMethod]
         public void TestUpdateShelfPackageType()
         {
@@ -103,6 +102,7 @@ namespace TestProject
 
         }
 
+        [TestMethod]
         public void TestUpdateShelfStatus()
         {
             //Arrange
