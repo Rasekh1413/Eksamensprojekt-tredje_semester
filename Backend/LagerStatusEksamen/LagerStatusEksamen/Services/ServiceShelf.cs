@@ -19,7 +19,14 @@ namespace LagerStatusEksamen.Services
         #endregion
 
         #region Constructor
+        /// <summary>
+        /// Default constructor, which creates a service connected to the default sql-db
+        /// </summary>
         public ServiceShelf() { _con = Secret.ConnectionString; }
+        /// <summary>
+        /// Custom constructor, which creates a service connected to a custom default sql-db
+        /// </summary>
+        /// <param name="con">The connection to the custom sql-db</param>
         public ServiceShelf(string con) { _con = con; }
         #endregion
 
