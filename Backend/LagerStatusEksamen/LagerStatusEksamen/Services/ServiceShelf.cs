@@ -37,16 +37,22 @@ namespace LagerStatusEksamen.Services
             {
                 try
                 {
+                    // error occurs when FK is null
                     bool isNull = shelf.PackageTypeName == null;
-                    string nullString = isNull ? "null" : "@PackageTypeName";
-                    string insertSql = $"INSERT INTO Shelves(MAC, PackageTypeName , IsStocked) Values(@MAC, {nullString} , @IsStocked)";
+                    string packageTypeName = isNull ? "null" : "@PackageTypeName";
+                    string insertSql = $"INSERT INTO Shelves(MAC, PackageTypeName, IsStocked) Values(@MAC, {packageTypeName}, @IsStocked)";
+                    
                     SqlCommand command = new SqlCommand(insertSql, connection);
                     command.Parameters.AddWithValue("MAC", shelf.MAC);
-                    if (!isNull) command.Parameters.AddWithValue("PackageTypeName ", shelf.PackageTypeName);
+                    if (!isNull)
+                    {
+                        command.Parameters.AddWithValue("PackageTypeName ", shelf.PackageTypeName);
+                    }
                     command.Parameters.AddWithValue("IsStocked", shelf.IsStocked);
                     connection.Open();
                     command.ExecuteNonQuery();
 
+                    // update "shelf" variable
                     addedShelf = GetByMAC(shelf.MAC);
                 }
                 catch (SqlException ex)
