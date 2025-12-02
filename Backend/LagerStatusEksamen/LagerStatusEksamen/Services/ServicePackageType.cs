@@ -9,7 +9,7 @@ namespace LagerStatusEksamen.Services
     public class ServicePackageType : IServicePackageType
     {
         #region Instances
-        private string selectbynamesql = "SELECT * FROM PackageTypes WHERE Name = @Name";
+        private string selectByNameSql = "SELECT * FROM PackageTypes WHERE Name = @Name";
         private string selectSql = "SELECT * FROM PackageTypes";
         private string insertSql = @"INSERT INTO PackageTypes(Name, Description) Values(@Name, @Description)";
         private string deleteSql = "DELETE FROM PackageTypes WHERE Name = @Name";
@@ -27,8 +27,9 @@ namespace LagerStatusEksamen.Services
         public PackageType Add(string name, PackageType packagetype)
         {
             if (packagetype == null)
+            {
                 throw new ArgumentNullException(nameof(packagetype));
-            string insertSql = "INSERT INTO PackageTypes (Name, Description) VALUES (@Name, @Description)";
+            }
             using (SqlConnection connection = new SqlConnection(Secret.ConnectionString))
             {
                 SqlCommand command = new SqlCommand(insertSql, connection);
@@ -43,7 +44,6 @@ namespace LagerStatusEksamen.Services
         public List<PackageType> GetAll()
         {
             List<PackageType> list = new List<PackageType>();
-            string selectSql = "SELECT Name, Description FROM PackageTypes";
             using (SqlConnection connection = new SqlConnection(Secret.ConnectionString))
             {
                 SqlCommand command = new SqlCommand(selectSql, connection);
@@ -62,9 +62,10 @@ namespace LagerStatusEksamen.Services
         public PackageType Delete(string name)
         {
             PackageType packagetype = GetByName(name);
-            if (packagetype == null)
+            if (packagetype == null) 
+            {
                 throw new ArgumentNullException(nameof(packagetype));
-            string deleteSql = "DELETE FROM PackageTypes WHERE Name = @Name";
+            }
             using (SqlConnection connection = new SqlConnection(Secret.ConnectionString))
             {
                 SqlCommand command = new SqlCommand(deleteSql, connection);
@@ -84,12 +85,13 @@ namespace LagerStatusEksamen.Services
                 if (Name == null) { return null; }
                 try
                 {
-                    SqlCommand command = new SqlCommand(selectbynamesql, connection);
+                    SqlCommand command = new SqlCommand(selectByNameSql, connection);
                     command.Parameters.AddWithValue("@Name", Name);
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
 
                     if (reader.Read()) { packageType = Read(reader); }
+                    else { return null; }
                     reader.Close();
                 }
                 catch (SqlException ex) { throw ex; }
@@ -127,7 +129,6 @@ namespace LagerStatusEksamen.Services
         {
             string name = reader.IsDBNull(0) ? null : reader.GetString(0);
             string description = reader.IsDBNull(1) ? null : reader.GetString(1);
-
             return new PackageType(name, description);
         }
         #endregion
