@@ -11,9 +11,9 @@ namespace LagerStatusEksamen.Services
         #region Instances
         private string selectSql = "SELECT * FROM Shelves";
         private string filterBySensorSql = "SELECT * FROM Shelves WHERE MAC = @MAC";
-        private string insertSql = "INSERT INTO Shelves(MAC, PackageTypeName , IsStocked) Values(@MAC, @PackageTypeName , @IsStocked)";
+        private string insertSql = "INSERT INTO Shelves(MAC, PackageTypeName, IsStocked) Values(@MAC, @PackageTypeName, @IsStocked)";
         private string deleteSql = "DELETE FROM Shelves WHERE MAC = @MAC";
-        private string updatePackageSql = "UPDATE Shelves SET PackageTypeName  = @PackageTypeName  WHERE MAC = @MAC";
+        private string updatePackageSql = "UPDATE Shelves SET PackageTypeName = @PackageTypeName WHERE MAC = @MAC";
         private string updateStatusSql = "UPDATE Shelves SET IsStocked = @IsStocked WHERE MAC = @MAC";
         private string _con;
         #endregion
