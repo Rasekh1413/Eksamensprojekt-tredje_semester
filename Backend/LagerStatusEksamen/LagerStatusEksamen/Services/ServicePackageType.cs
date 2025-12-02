@@ -11,7 +11,7 @@ namespace LagerStatusEksamen.Services
         #region Instances
         private string selectByNameSql = "SELECT * FROM PackageTypes WHERE Name = @Name";
         private string selectSql = "SELECT * FROM PackageTypes";
-        private string insertSql = @"INSERT INTO PackageTypes(Name, Description) Values(@Name, @Description)";
+        private string insertSql = "INSERT INTO PackageTypes(Name, Description) Values(@Name, @Description)";
         private string deleteSql = "DELETE FROM PackageTypes WHERE Name = @Name";
         private string updatePackageSql = "UPDATE PackageTypes SET Description  = @Description  WHERE Name = @Name";
         private string _con;
