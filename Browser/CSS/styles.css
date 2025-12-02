@@ -1,8 +1,59 @@
 h1{
-    color:rgb(222, 65, 239);
-    font-style: italic;
+    color:rgb(0, 0, 0);
+    
 }
 
-.indholdsFortegnelse{
-    font-size:18px;
+body{
+    margin: 0;
+    padding: 0;
+}
+#app{
+    margin-left: 15px;
+}
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: #03787c;
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #0a6164;
+  color: white;
+}
+
+/*Style af tabellen til dashboard*/
+.Dashboard{
+    width: 75%;
+    margin-top: 10px;
+    font-family: Arial, sans-serif;
+    border-spacing: 0;
+}
+
+thead {
+  background-color:#11b4b9;
+  color: rgb(255, 255, 255);
+}
+
+th, td {
+  padding: 14px;
+  text-align: left;
+  border: 1px solid#071212;
+  
 }

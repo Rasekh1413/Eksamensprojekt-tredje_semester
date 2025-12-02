@@ -1,20 +1,11 @@
+
 const app = Vue.createApp({
     data() {
         return {
-            title:'Velkommen til min Tamplate',
-            indhold:['v-for','v-if','v-on:click','v-Show'],
-            showIndhold:true
+            showHyldeList:[{ID:1,Status:true,PackageTypeName:'Duftlys',MAC:'098556'},{ID:2,Status:true,PackageTypeName:'BodyScup',MAC:'9649h'}],
+            hylde:'',
         }
     },
     methods: {
-        ChangeShowIndholdStatus(){
-            if(this.showIndhold==true){
-                this.showIndhold=false
-            }
-            else{
-                this.showIndhold=true
-            }
-                
-        }
     }
 })

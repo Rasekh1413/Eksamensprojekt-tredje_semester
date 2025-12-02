@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <!---Import styles-->
+        <link rel="stylesheet" href="./CSS/styles.css"/>
+        <!--Import vue-->
+        <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
+
+    </head>
+    <body>
+        <div class="topnav">
+            <a class="active" href="#home">Self care-And share: Lager</a>
+            <a href="#news">News</a>
+            <a href="#contact">Contact</a>
+            <a href="#about">About</a>
+        </div>
+        <div id="app">
+            <table class="Dashboard">  
+                <thead>
+                    <tr>
+                        <th>Hylde nummer</th>
+                        <th>Lager status</th>
+                        <th>Pakke typpe</th>
+                        <th>M.A.C</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="hylde in showHyldeList">
+                        <td>{{hylde.ID}}</td>
+                        <td>{{hylde.Status}}</td>
+                        <td>{{hylde.PackageTypeName}}</td>
+                        <td>{{hylde.MAC}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <!--Import app-->
+        <script src="./js/main.js"></script>
+
+        <!--Mount app-->
+        <script>
+            const mountedApp = app.mount('#app')
+        </script>
+    </body>
+</html>
