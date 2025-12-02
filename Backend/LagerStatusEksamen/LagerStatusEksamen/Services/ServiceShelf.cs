@@ -46,7 +46,7 @@ namespace LagerStatusEksamen.Services
                     command.Parameters.AddWithValue("MAC", shelf.MAC);
                     if (!isNull)
                     {
-                        command.Parameters.AddWithValue("PackageTypeName ", shelf.PackageTypeName);
+                        command.Parameters.AddWithValue("PackageTypeName", shelf.PackageTypeName);
                     }
                     command.Parameters.AddWithValue("IsStocked", shelf.IsStocked);
                     connection.Open();
