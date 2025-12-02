@@ -76,7 +76,6 @@ namespace LagerStatusEksamen.Services
             }
             return packagetype;
         }
-
         public PackageType? GetByName(string Name)
         {
             using (SqlConnection connection = new SqlConnection(Secret.ConnectionString))
@@ -122,6 +121,7 @@ namespace LagerStatusEksamen.Services
             }
         }
         #endregion
+
         #region Helper functions
         private PackageType Read(SqlDataReader reader)
         {
