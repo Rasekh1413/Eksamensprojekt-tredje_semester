@@ -11,7 +11,6 @@ namespace LagerStatusEksamen.Services
         #region Instances
         private string selectSql = "SELECT * FROM Shelves";
         private string filterBySensorSql = "SELECT * FROM Shelves WHERE MAC = @MAC";
-        private string insertSql = "INSERT INTO Shelves(MAC, PackageTypeName , IsStocked) Values(@MAC, @PackageTypeName , @IsStocked)";
         private string deleteSql = "DELETE FROM Shelves WHERE MAC = @MAC";
         private string updatePackageSql = "UPDATE Shelves SET PackageTypeName  = @PackageTypeName  WHERE MAC = @MAC";
         private string updateStatusSql = "UPDATE Shelves SET IsStocked = @IsStocked WHERE MAC = @MAC";
@@ -38,9 +37,12 @@ namespace LagerStatusEksamen.Services
             {
                 try
                 {
+                    bool isNull = shelf.PackageTypeName == null;
+                    string nullString = isNull ? "null" : "@PackageTypeName";
+                    string insertSql = $"INSERT INTO Shelves(MAC, PackageTypeName , IsStocked) Values(@MAC, {nullString} , @IsStocked)";
                     SqlCommand command = new SqlCommand(insertSql, connection);
                     command.Parameters.AddWithValue("MAC", shelf.MAC);
-                    command.Parameters.AddWithValue("PackageTypeName ", shelf.PackageTypeName);
+                    if (!isNull) command.Parameters.AddWithValue("PackageTypeName ", shelf.PackageTypeName);
                     command.Parameters.AddWithValue("IsStocked", shelf.IsStocked);
                     connection.Open();
                     command.ExecuteNonQuery();
