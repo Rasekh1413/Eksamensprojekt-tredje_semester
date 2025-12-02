@@ -6,8 +6,8 @@ namespace LagerStatusEksamen.Interfaces
     {
         public List<PackageType> GetAll();
         public PackageType? GetByName(string name);
-        public PackageType Add(PackageType packageType);
+        public PackageType Add(string name, PackageType packageType);
         public PackageType? Delete(string name);
-        public PackageType? Update(PackageType packageType);
+        public PackageType? Update(string name, string description);
     }
 }

@@ -1,61 +1,132 @@
 ﻿using LagerStatusEksamen.Interfaces;
 using LagerStatusEksamen.Models;
-using System.Diagnostics.Eventing.Reader;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.Data.SqlClient;
+using System;
 
 namespace LagerStatusEksamen.Services
 {
     public class ServicePackageType : IServicePackageType
     {
-        private readonly List<PackageType> _packageTypes = new List<PackageType>();
-        public PackageType Add(PackageType packageType)
+        #region Instances
+        private string selectByNameSql = "SELECT * FROM PackageTypes WHERE Name = @Name";
+        private string selectSql = "SELECT * FROM PackageTypes";
+        private string insertSql = "INSERT INTO PackageTypes(Name, Description) Values(@Name, @Description)";
+        private string deleteSql = "DELETE FROM PackageTypes WHERE Name = @Name";
+        private string updatePackageSql = "UPDATE PackageTypes SET Description  = @Description  WHERE Name = @Name";
+        private string _con;
+        #endregion
+
+        #region Constructor
+        public ServicePackageType() { _con = Secret.ConnectionString; }
+        public ServicePackageType(string con) { _con = con; }
+        #endregion
+
+        #region Methods
+        public PackageType Add(string name, PackageType packagetype)
         {
-            if (packageType == null)
-                throw new ArgumentNullException(nameof(packageType));
+            if (packagetype == null)
+            {
+                throw new ArgumentNullException(nameof(packagetype));
+            }
+            using (SqlConnection connection = new SqlConnection(Secret.ConnectionString))
+            {
+                SqlCommand command = new SqlCommand(insertSql, connection);
+                command.Parameters.AddWithValue("@Name", packagetype.Name);
+                command.Parameters.AddWithValue("@Description", packagetype.Description);
 
-            // Prevent duplicates by name
-            if (_packageTypes.Any(p => p.Name.Equals(packageType.Name, StringComparison.OrdinalIgnoreCase)))
-                throw new InvalidOperationException("Package type already exists.");
-
-            _packageTypes.Add(packageType);
-            return packageType;
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+            return packagetype;
         }
-
-
-        // Read: Get all
         public List<PackageType> GetAll()
         {
-            return _packageTypes;
+            List<PackageType> list = new List<PackageType>();
+            using (SqlConnection connection = new SqlConnection(Secret.ConnectionString))
+            {
+                SqlCommand command = new SqlCommand(selectSql, connection);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    list.Add(new PackageType(
+                        reader["Name"].ToString(),
+                        reader["Description"].ToString()
+                    ));
+                }
+            }
+            return list;
         }
-
-        // Read: Get by name
-        public PackageType? GetByName(string name)
-        {
-            return _packageTypes.FirstOrDefault(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
-        }
-
-        public PackageType? Update(PackageType packageType)
-        {
-            if (packageType == null)
-                throw new ArgumentNullException(nameof(packageType));
-
-            var existing = GetByName(packageType.Name);
-            if (existing == null)
-                return null;
-
-            // Update properties
-            existing.Description = packageType.Description;
-
-            return existing;
-        }
-
         public PackageType? Delete(string name)
         {
-            var existing = GetByName(name);
-            if (existing == null)
-                return null;
+            PackageType? packagetype = GetByName(name);
+            if (packagetype == null) { return null; }
+            using (SqlConnection connection = new SqlConnection(Secret.ConnectionString))
+            {
+                SqlCommand command = new SqlCommand(deleteSql, connection);
+                command.Parameters.AddWithValue("@Name", packagetype.Name);
+                command.Parameters.AddWithValue("@Description", packagetype.Description);
 
-            _packageTypes.Remove(existing);
-            return existing;
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+            return packagetype;
         }
+        public PackageType? GetByName(string Name)
+        {
+            using (SqlConnection connection = new SqlConnection(Secret.ConnectionString))
+            {
+                PackageType? packageType = new PackageType();
+                if (Name == null) { return null; }
+                try
+                {
+                    SqlCommand command = new SqlCommand(selectByNameSql, connection);
+                    command.Parameters.AddWithValue("@Name", Name);
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.Read()) { packageType = Read(reader); }
+                    else { return null; }
+                    reader.Close();
+                }
+                catch (SqlException ex) { throw ex; }
+                catch (Exception ex) { throw ex; }
+                finally { connection.Close(); }
+                return packageType;
+            }
+        }
+        public PackageType? Update(string name, string description)
+        {
+            using (SqlConnection connection = new SqlConnection(Secret.ConnectionString))
+            {
+                PackageType? packageType = GetByName(name);
+                if (packageType == null) { return null; }
+                try
+                {
+                    SqlCommand command = new SqlCommand(updatePackageSql, connection);
+                    command.Parameters.AddWithValue("@Name", name);
+                    command.Parameters.AddWithValue("@Description", description);
+                    connection.Open();
+                    command.ExecuteNonQuery();
+
+                    packageType = GetByName(name);
+                }
+                catch (SqlException ex) { throw ex; }
+                catch (Exception ex) { throw ex; }
+                finally { connection.Close(); }
+                return packageType;
+            }
+        }
+        #endregion
+
+        #region Helper functions
+        private PackageType Read(SqlDataReader reader)
+        {
+            string? name = reader.IsDBNull(0) ? null : reader.GetString(0);
+            string? description = reader.IsDBNull(1) ? null : reader.GetString(1);
+            return new PackageType(name, description);
+        }
+        #endregion
     }
 }

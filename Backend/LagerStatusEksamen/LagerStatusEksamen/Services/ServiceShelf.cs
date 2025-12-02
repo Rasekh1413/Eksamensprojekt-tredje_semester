@@ -57,7 +57,6 @@ namespace LagerStatusEksamen.Services
                 return addedShelf;
             }
         }
-
         public Shelf? Delete(string mac)
         {
             using (SqlConnection connection = new SqlConnection(Secret.ConnectionString))
@@ -77,7 +76,6 @@ namespace LagerStatusEksamen.Services
                 return deleteShelf;
             }
         }
-
         public List<Shelf> GetAll()
         {
             using (SqlConnection connection = new SqlConnection(Secret.ConnectionString))
@@ -102,7 +100,6 @@ namespace LagerStatusEksamen.Services
                 return shelves;
             }
         }
-
         public Shelf? GetByMAC(string mac)
         {
             using (SqlConnection connection = new SqlConnection(Secret.ConnectionString))
@@ -117,6 +114,7 @@ namespace LagerStatusEksamen.Services
                     SqlDataReader reader = command.ExecuteReader();
 
                     if (reader.Read()) { shelf = Read(reader); }
+                    else { return null; }
                     reader.Close();
                 }
                 catch (SqlException ex) { throw ex; }
@@ -125,7 +123,6 @@ namespace LagerStatusEksamen.Services
                 return shelf;
             }
         }
-
         public Shelf? UpdatePackageType(string mac, string type)
         {
             using(SqlConnection connection = new SqlConnection(Secret.ConnectionString))
@@ -148,7 +145,6 @@ namespace LagerStatusEksamen.Services
                 return shelf;
             }
         }
-
         public Shelf? UpdateStatus(string mac, bool status)
         {
             using (SqlConnection connection = new SqlConnection(Secret.ConnectionString))

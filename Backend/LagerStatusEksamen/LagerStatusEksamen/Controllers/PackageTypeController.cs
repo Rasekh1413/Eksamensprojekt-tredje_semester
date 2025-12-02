@@ -46,7 +46,7 @@ namespace LagerStatusEksamen.Controllers
         {
             if (!IsValid(value)) return BadRequest();
 
-            var result = _db.Add(value);
+            var result = _db.Add(value.Name, value);
             string uri = Url.RouteUrl(RouteData.Values) + "/" + result.Name;
             return Created(uri, result);
         }
@@ -60,7 +60,7 @@ namespace LagerStatusEksamen.Controllers
         {
             if (!IsValid(value)) return BadRequest();
 
-            var result = _db.Update(value);
+            var result = _db.Update(value.Name, value.Description);
             if (result == null) return NotFound();
             else return Ok(result);
         }
