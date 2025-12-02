@@ -3,7 +3,12 @@ h1{
     
 }
 
-#map { height: 180px; }
+#map { 
+    height: 200px;
+    width: 100px; 
+    padding-left: 250px;
+    border: black;
+}
 
 body{
     margin: 0;
