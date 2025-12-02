@@ -20,7 +20,6 @@ namespace LagerStatusEksamen.Services
         #region Constructor
         public ServicePackageType() { _con = Secret.ConnectionString; }
         public ServicePackageType(string con) { _con = con; }
-
         #endregion
 
         #region Methods
@@ -59,13 +58,10 @@ namespace LagerStatusEksamen.Services
             }
             return list;
         }
-        public PackageType Delete(string name)
+        public PackageType? Delete(string name)
         {
             PackageType packagetype = GetByName(name);
-            if (packagetype == null) 
-            {
-                throw new ArgumentNullException(nameof(packagetype));
-            }
+            if (packagetype == null) { return null; }
             using (SqlConnection connection = new SqlConnection(Secret.ConnectionString))
             {
                 SqlCommand command = new SqlCommand(deleteSql, connection);
