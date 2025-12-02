@@ -60,7 +60,7 @@ namespace LagerStatusEksamen.Services
         }
         public PackageType? Delete(string name)
         {
-            PackageType packagetype = GetByName(name);
+            PackageType? packagetype = GetByName(name);
             if (packagetype == null) { return null; }
             using (SqlConnection connection = new SqlConnection(Secret.ConnectionString))
             {
@@ -123,8 +123,8 @@ namespace LagerStatusEksamen.Services
         #region Helper functions
         private PackageType Read(SqlDataReader reader)
         {
-            string name = reader.IsDBNull(0) ? null : reader.GetString(0);
-            string description = reader.IsDBNull(1) ? null : reader.GetString(1);
+            string? name = reader.IsDBNull(0) ? null : reader.GetString(0);
+            string? description = reader.IsDBNull(1) ? null : reader.GetString(1);
             return new PackageType(name, description);
         }
         #endregion
