@@ -24,15 +24,19 @@ namespace TestProject
         {
             //Arrange
             IServiceShelf _service = new ServiceShelf();
+            IServicePackageType _ptService = new ServicePackageType();
 
             //Act
             int countBefore = _service.GetAll().Count();
+            PackageType pt = new PackageType("rubber Duck", "Toy for the bath");
+            _ptService.Add(pt.Name,pt);
 
-            Shelf s = new Shelf("75515f", "Ruber", true);
+            Shelf s = new Shelf("75515f",pt.Name, true);
             _service.Add(s);
 
             int counterAfter = _service.GetAll().Count();
             _service.Delete(s.MAC);
+            _ptService.Delete(pt.Name);
 
             //Assert
             Assert.AreEqual(countBefore + 1, counterAfter);
@@ -43,13 +47,18 @@ namespace TestProject
         {
             //Arrange
             IServiceShelf _service = new ServiceShelf();
+            IServicePackageType _ptService = new ServicePackageType();
 
             //Act
-            Shelf sh = new Shelf("8855", "Ruber", true);
+            PackageType pt = new PackageType("Duck", "Toy for the bath");
+            _ptService.Add(pt.Name, pt);
+
+            Shelf sh = new Shelf("8855",pt.Name, true);
             _service.Add(sh);
 
             Shelf? foundShelf = _service.GetByMAC(sh.MAC);
             _service.Delete(sh.MAC);
+            _ptService.Delete(pt.Name);
 
             //Assert
             Assert.AreEqual(sh.MAC, foundShelf.MAC);
@@ -60,17 +69,19 @@ namespace TestProject
         {
             //Arrange
             IServiceShelf _service = new ServiceShelf();
-     
-            //Act
-            Shelf s = new Shelf("0987h", "Ruber", true);
-            _service.Add(s);
-            int counterBefore = _service.GetAll().Count();
+            IServicePackageType _ptService = new ServicePackageType();
 
-            _service.Delete(s.MAC);
-            int counterAfter = _service.GetAll().Count();
+            //Act
+            PackageType pt = new PackageType("rubber Duck", "Toy for the bath");
+            _ptService.Add(pt.Name,pt);
+            Shelf s = new Shelf("0987h", pt.Name, true);
+            _service.Add(s);
+
+            Shelf? deletedShelf= _service.Delete(s.MAC);
+            _ptService.Delete(pt.Name);
 
             //Assert
-            Assert.AreEqual(counterBefore - 1, counterAfter);
+            Assert.AreEqual(s.MAC,deletedShelf.MAC);
         }
 
         [TestMethod]
@@ -78,14 +89,22 @@ namespace TestProject
         {
             //Arrange
             IServiceShelf _service = new ServiceShelf();
-          
+            IServicePackageType _ptService = new ServicePackageType();
+            string newPTName = "Rubber Duck";
+
             //Act
-            Shelf s = new Shelf("977r4", "Ruber", true);
+            PackageType pt = new PackageType("Duck", "Toy for the bath");
+            PackageType pt2 = new PackageType("Rubber Duck", "Toy for the bath");
+            _ptService.Add(pt.Name, pt);
+            _ptService.Add(pt2.Name, pt2);
+
+            Shelf s = new Shelf("977r4", pt.Name, true);
             _service.Add(s);
-            string newPTName = "rubber duck";
 
             Shelf? updatesShelf = _service.UpdatePackageType(s.MAC, newPTName);
             _service.Delete(s.MAC);
+            _ptService.Delete(pt.Name);
+            _ptService.Delete(pt2.Name);
 
             //Assert
             Assert.AreEqual(updatesShelf.PackageTypeName, newPTName);
@@ -96,14 +115,19 @@ namespace TestProject
         {
             //Arrange
             IServiceShelf _service = new ServiceShelf();
+            IServicePackageType _ptService= new ServicePackageType();
 
             //Act
-            Shelf s = new Shelf("ofg876", "Ruber", false);
+            PackageType pt = new PackageType("Duck", "Toy for the bath");
+            _ptService.Add(pt.Name, pt);
+
+            Shelf s = new Shelf("ofg876", pt.Name, false);
             _service.Add(s);
             bool newStatus = true;
 
             Shelf? updatesShelf = _service.UpdateStatus(s.MAC, newStatus);
             _service.Delete(s.MAC);
+            _ptService.Delete(pt.Name);
 
             //Assert
             Assert.AreEqual(updatesShelf.IsStocked, newStatus);
