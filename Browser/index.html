@@ -33,6 +33,7 @@
                         <th>Lager status</th>
                         <th>Pakke typpe</th>
                         <th>M.A.C</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,10 +42,40 @@
                         <td>{{hylde.Status}}</td>
                         <td>{{hylde.PackageTypeName}}</td>
                         <td>{{hylde.MAC}}</td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>
-            <div id="map"></div>
+
+            <br>
+            <div class="float-container">
+                <div class="float-child">
+                    <h1>Package types</h1>
+                    <table class="DashboardPT">  
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="pt in showPTList">
+                                <td>{{pt.Name}}</td>
+                                <td>{{pt.Description}}</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div id="map">
+
+                </div>
+            </div>
+            
+            
+            
 
         </div>
         <!--Import app-->

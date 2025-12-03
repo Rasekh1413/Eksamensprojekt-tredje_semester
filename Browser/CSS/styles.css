@@ -1,13 +1,15 @@
-h1{
-    color:rgb(0, 0, 0);
-    
+h1 {
+  color: #000000;
+  margin-bottom: 10px;
+  font-weight: 600;
 }
 
 #map { 
-    height: 200px;
-    width: 100px; 
+    height: 300px;
+    width: 200px; 
     padding-left: 250px;
-    border: black;
+    /*Gør så map og PtDashbord er i samme højde*/
+    margin-top: 70px;
 }
 
 body{
@@ -16,7 +18,8 @@ body{
 }
 
 #app{
-    margin-left: 15px;
+    padding:15px;
+    
 }
 /* Add a black background color to the top navigation */
 .topnav {
@@ -46,13 +49,8 @@ body{
   color: white;
 }
 
-/*Style af tabellen til dashboard*/
-.Dashboard{
-    width: 75%;
-    margin-top: 10px;
-    font-family: Arial, sans-serif;
-    border-spacing: 0;
-}
+
+/*Style af elementerne i en tebel*/
 
 thead {
   background-color:#03999e;
@@ -64,4 +62,44 @@ th, td {
   text-align: left;
   border: 1px solid#071212;
   width: 30px;
+}
+
+/*De lige rækker(2,4,6 ect.) i de to tabeler, farves lysegrå*/
+.Dashboard tbody tr:nth-child(even),
+.DashboardPT tbody tr:nth-child(even){
+  background-color: rgb(221, 218, 218);
+}
+
+/*Når musen hover over en række i tabelen, skifter den 
+farve og musen bliver en pointer*/
+.Dashboard tbody tr:hover,.DashboardPT tbody tr:hover{
+  background-color:rgb(230, 255, 138) ;
+  cursor: pointer;
+}
+
+/*Style af tabellen til dashboard*/
+.Dashboard{
+    width: 75%;
+    margin-top: 10px;
+    font-family: Arial, sans-serif;
+    border-spacing: 0;
+}
+
+/* styles af tabel packagetypes*/
+.DashboardPT{
+    width: 100%;
+    margin-top: 10px;
+    font-family: Arial, sans-serif;
+    border-spacing: 0;
+    padding-right: 15px;
+}
+/*Gør så de 2 div'tags placeres vedsiden af hinanden*/
+.float-container{
+  display: flex;
+  align-items: stretch;
+}
+
+.float-child{
+    width: 45%;
+    float: left;
 }

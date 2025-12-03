@@ -5,10 +5,10 @@ const app = Vue.createApp({
     data() {
         return {
             shelfInDB:[],
-            showShelfList:[{ID:1,Status:true,PackageTypeName:'Duftlys',MAC:'098556'},{ID:2,Status:true,PackageTypeName:'BodyScup',MAC:'9649h'}],
+            showShelfList:[{ID:1,Status:true,PackageTypeName:'Lavendel duftlys',MAC:'098556'},{ID:2,Status:true,PackageTypeName:'Berry BodyScrup',MAC:'9649h'}],
             shelf:'',
             PTInDB:[],
-            showPTList:[],
+            showPTList:[{Name:'Lavendel duftlys',Description:'Duftlys med duft af lavenden'},{Name:'Berry BodyScrup',Description:'Bodyscrub med kaffegrums duft af bær'}],
             PT:[]
 
 
