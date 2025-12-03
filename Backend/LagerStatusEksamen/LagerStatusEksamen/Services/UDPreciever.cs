@@ -11,7 +11,7 @@ namespace LagerStatusEksamen.Services
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly int _port = 55010;
-        private readonly string _serverUrl = "http://localhost:5000/api/shelves";
+        private readonly string _serverUrl = "http://localhost:5155/api/shelves";
 
         public UDPreciever(IHttpClientFactory httpClientFactory)
         {
@@ -38,6 +38,8 @@ namespace LagerStatusEksamen.Services
 
                         var client = _httpClientFactory.CreateClient();
                         var response = await client.PostAsJsonAsync(_serverUrl, package, stoppingToken);
+                        
+                        Console.WriteLine("UDPreciever tried to post with"+ package.Status);
 
                         if (response.IsSuccessStatusCode)
                         {
