@@ -13,6 +13,16 @@ builder.Services.AddSwaggerGen();//Swagger
 builder.Services.AddSingleton<IServicePackageType>(new ServicePackageType());
 builder.Services.AddSingleton<IServiceShelf>(new ServiceShelf());
 
+const string CorsName = "allow all";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(CorsName,
+        builder =>
+            builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -22,6 +32,8 @@ var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(CorsName);//CORS
 
 app.UseAuthorization();
 
