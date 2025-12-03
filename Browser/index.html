@@ -36,6 +36,7 @@
                         <th>Lager status</th>
                         <th>Pakke typpe</th>
                         <th>M.A.C</th>
+                        <th>Actions</th>
                         
                     </tr>
                 </thead>
@@ -45,15 +46,18 @@
                         <td>{{shelf.isStocked}}</td>
                         <td>{{shelf.packageTypeName}}</td>
                         <td>{{shelf.mac}}</td>
+                        <td>
+                            <button @click="deleteShelf(shelf.mac)">Delete</button>
+                        </td>
                         
                     </tr>
                 </tbody>
             </table>
-
             <br>
             <div class="float-container">
                 <div class="float-child">
                     <h1>Package types</h1>
+                    <button @click="getAllPT">Load shelves</button>
                     <table class="DashboardPT">  
                         <thead>
                             <tr>
@@ -64,8 +68,8 @@
                         </thead>
                         <tbody>
                             <tr v-for="pt in showPTList">
-                                <td>{{pt.Name}}</td>
-                                <td>{{pt.Description}}</td>
+                                <td>{{pt.name}}</td>
+                                <td>{{pt.description}}</td>
                                 <td></td>
                             </tr>
                         </tbody>
