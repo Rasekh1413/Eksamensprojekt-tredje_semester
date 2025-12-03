@@ -16,6 +16,8 @@
         
         <!--Import vue-->
         <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
+        <!--Import axios-->
+        <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
 
     </head>
     <body>
@@ -26,6 +28,7 @@
             <a href="#about">About</a>
         </div>
         <div id="app">
+            <button @click="getAllShelf">Load shelves</button>
             <table class="Dashboard">  
                 <thead>
                     <tr>
@@ -33,16 +36,16 @@
                         <th>Lager status</th>
                         <th>Pakke typpe</th>
                         <th>M.A.C</th>
-                        <th>Actions</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="hylde in showShelfList">
-                        <td>{{hylde.ID}}</td>
-                        <td>{{hylde.Status}}</td>
-                        <td>{{hylde.PackageTypeName}}</td>
-                        <td>{{hylde.MAC}}</td>
-                        <td></td>
+                    <tr v-for="shelf in showShelfList">
+                        <td>{{shelf.id}}</td>
+                        <td>{{shelf.isStocked}}</td>
+                        <td>{{shelf.packageTypeName}}</td>
+                        <td>{{shelf.mac}}</td>
+                        
                     </tr>
                 </tbody>
             </table>
@@ -73,9 +76,6 @@
 
                 </div>
             </div>
-            
-            
-            
 
         </div>
         <!--Import app-->
@@ -88,6 +88,6 @@
 
         <!--Importer map.js-->
         <script src="JS/map.js"></script>
-
+        
     </body>
 </html>

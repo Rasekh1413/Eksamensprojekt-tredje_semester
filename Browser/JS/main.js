@@ -1,14 +1,16 @@
 //PT will be a reference to 'PackageType'
+const baseURL='http://localhost:5155/api/'
+const baseURLShelf =baseURL+'Shelf'
+const baseURLPt=baseURL+'PackageType'
 
-const baseURl =''
 const app = Vue.createApp({
     data() {
         return {
             shelfInDB:[],
-            showShelfList:[{ID:1,Status:true,PackageTypeName:'Lavendel duftlys',MAC:'098556'},{ID:2,Status:true,PackageTypeName:'Berry BodyScrup',MAC:'9649h'}],
+            showShelfList:[],
             shelf:'',
             PTInDB:[],
-            showPTList:[{Name:'Lavendel duftlys',Description:'Duftlys med duft af lavenden'},{Name:'Berry BodyScrup',Description:'Bodyscrub med kaffegrums duft af bær'}],
+            showPTList:[],
             PT:[]
 
 
@@ -17,15 +19,25 @@ const app = Vue.createApp({
     methods: {
         //Methods using shelf
         getAllShelf(){
-
+            console.log("Er i metoden GetAllShelf")
+            axios.get(this.baseURlShelf)
+            .then(
+                response=>{
+                    console.log(response)
+                    this.shelfInDB = response.data
+                    this.showShelfList= this.shelfInDB
+                }
+            ).catch(
+                error=>{
+                    console.log(error)
+                }
+            )
+            console.log("Færdig i metoden GetAllShelf")
         },
         deleteShelf(){
 
         },
         UpdateShelfPackagtype(){
-
-        },
-        UpdateShelfStatus(){
 
         },
         //Methods usign Packagetype
