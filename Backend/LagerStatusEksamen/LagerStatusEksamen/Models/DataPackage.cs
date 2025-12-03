@@ -1,4 +1,6 @@
-﻿namespace LagerStatusEksamen.Models
+﻿using LagerStatusEksamen.Services;
+
+namespace LagerStatusEksamen.Models
 {
     /// <summary>
     /// Data sent from the Raspberry Pi and to the REST Server
@@ -12,7 +14,7 @@
         public DataPackage(string MAC, bool status)
         {
             this.MAC = MAC;
-            Status = status;
+            Status = status;            
         }
     }
 }

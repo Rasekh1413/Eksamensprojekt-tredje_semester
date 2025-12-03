@@ -12,6 +12,8 @@ builder.Services.AddSwaggerGen();//Swagger
 
 builder.Services.AddSingleton<IServicePackageType>(new ServicePackageType());
 builder.Services.AddSingleton<IServiceShelf>(new ServiceShelf());
+builder.Services.AddHttpClient();
+builder.Services.AddHostedService<UDPreciever>();
 
 var app = builder.Build();
 
