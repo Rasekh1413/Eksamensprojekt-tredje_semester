@@ -20,10 +20,10 @@ const app = Vue.createApp({
         //Methods using shelf
         getAllShelf(){
             console.log("Er i metoden GetAllShelf")
-            axios.get(this.baseURlShelf)
+            axios.get(baseURLShelf)
             .then(
                 response=>{
-                    console.log(response)
+                    console.log(response.data)
                     this.shelfInDB = response.data
                     this.showShelfList= this.shelfInDB
                 }
