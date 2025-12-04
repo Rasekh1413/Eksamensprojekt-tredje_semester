@@ -52,14 +52,13 @@
                             <button onclick="document.getElementById('id01').style.display='block'">Delete</button>
                             <div id="id01" class="modal">
                             <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
-                            <form class="modal-content" action="/action_page.php">
+                            <form class="modal-content">
                                 <div class="container">
                                 <h1>Slet Vare</h1>
                                 <p>Vil du slette varen {{shelf.packageTypeName}} fra inventar?</p>
                                 
                                 <div class="clearfix">
                                     <button class="btn" id="delete" @click="deleteShelf(shelf.mac)">Delete</button>
-                                    <button id="update" class="btn" @click="addPT">Update packagetype</button> <br>
                                 </div>
                                 </div>
                             </form>
@@ -76,6 +75,7 @@
                             }
                             }
                             </script>
+                            <button id="update" class="btn" @click="addPT">Update packagetype</button> <br>                            
                         </td>
                     </tr>
                 </tbody>
