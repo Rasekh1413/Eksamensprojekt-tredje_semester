@@ -12,6 +12,9 @@ builder.Services.AddSwaggerGen();//Swagger
 
 builder.Services.AddSingleton<IServicePackageType>(new ServicePackageType());
 builder.Services.AddSingleton<IServiceShelf>(new ServiceShelf());
+builder.Services.AddHttpClient(); // required for IHttpClientFactory
+builder.Services.AddHostedService<UDPreciever>();
+
 
 const string CorsName = "allow all";
 builder.Services.AddCors(options =>
