@@ -28,7 +28,7 @@
             <a href="#about">About</a>
         </div>
         <div id="app">
-            <button @click="getAllShelf">Load shelves</button>
+            <button class="btn" @click="getAllShelf">Load shelves</button>
             <table class="Dashboard">  
                 <thead>
                     <tr>
@@ -48,16 +48,19 @@
                         <td>{{shelf.packageTypeName}}</td>
                         <td>{{shelf.mac}}</td>
                         <td>
-                            <button @click="deleteShelf(shelf.mac)">Delete</button>
+                            <button class="btn" id="delete" @click="deleteShelf(shelf.mac)">Delete</button>
+                            <button id="update" class="btn" @click="addPT">Update packagetype </button> <br>
                         </td>
                     </tr>
                 </tbody>
             </table>
             <br>
+
             <div class="float-container">
                 <div class="float-child">
                     <h1>Package types</h1>
-                    <button @click="getAllPT">Load shelves</button>
+                    <button id="add" class="btn" @click="addPT">Add </button> <br><br>
+                    <button class="btn" @click="getAllPT">Load shelves</button>
                     <table class="DashboardPT">  
                         <thead>
                             <tr>
@@ -70,7 +73,9 @@
                             <tr v-for="pt in showPTList">
                                 <td>{{pt.name}}</td>
                                 <td>{{pt.description}}</td>
-                                <td></td>
+                                <td>
+                                    <button class="btn" id="delete" @click="deleteShelf(shelf.mac)">Delete</button> <br>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
