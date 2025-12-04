@@ -9,6 +9,7 @@ const app = Vue.createApp({
             shelfInDB:[],
             showShelfList:[],
             shelf:'',
+            newptName:'',
             PTInDB:[],
             showPTList:[],
             PT:[]
@@ -48,8 +49,19 @@ const app = Vue.createApp({
             )
             this.getAllShelf()
         },
-        UpdateShelfPackagtype(){
-            console.log("Er i metoden xxx")
+        UpdateShelfPackagtype(mac){
+            console.log("Er i metoden UpdateShelf")
+            axios.update(baseURLShelf+mac+'/'+newptName)
+            .then(
+                response =>{
+                    console.log(response)
+                }
+            ).catch(
+                error=>{
+                    console.log(error)
+                }
+            )
+            this.getAllShelf()
         },
 
         //Methods usign Packagetype
