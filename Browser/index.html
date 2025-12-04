@@ -43,13 +43,13 @@
                 <tbody>
                     <tr v-for="shelf in showShelfList">
                         <td>{{shelf.id}}</td>
-                        <td>{{shelf.isStocked}}</td>
+                        <td v-if="shelf.isStocked" style="color:green"><b>Fyldt</b></td>
+                        <td v-else="shelf.isStocked" style="color:red;background-color: rgb(245, 169, 169);"><em><b>Lav beholdning</b></em></td>
                         <td>{{shelf.packageTypeName}}</td>
                         <td>{{shelf.mac}}</td>
                         <td>
                             <button @click="deleteShelf(shelf.mac)">Delete</button>
                         </td>
-                        
                     </tr>
                 </tbody>
             </table>
