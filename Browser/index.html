@@ -48,7 +48,7 @@
                         <td>{{shelf.packageTypeName}}</td>
                         <td>{{shelf.mac}}</td>
                         <td>
-                            <button class="btn" id="delete" @click="deleteShelf(shelf.mac)">Delete</button>
+                            <button class="btn" id="delete" @click="deleteShelf(shelf.mac)" onclick="return confirm('Vil du gerne slette denne vare fra inventar?');">Delete</button>
                             <button id="update" class="btn" @click="addPT">Update packagetype </button> <br>
                         </td>
                     </tr>
