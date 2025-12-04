@@ -21,6 +21,31 @@ body{
     padding:15px;
     
 }
+
+
+/*Style af knapper*/
+.btn{
+  border-radius: 10px;
+  padding:4px;
+  padding-left:7px;
+  padding-right:7px;
+}
+
+#delete{
+  color: red;
+  border-color: red;
+}
+
+#add{
+  color: green;
+  border-color: green;
+}
+
+#update{
+  color: orange;
+  border-color: orange;
+}
+
 /* Add a black background color to the top navigation */
 .topnav {
   background-color: #03787c;

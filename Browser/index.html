@@ -28,7 +28,7 @@
             <a href="#about">About</a>
         </div>
         <div id="app">
-            <button @click="getAllShelf">Load shelves</button>
+            <button class="btn" @click="getAllShelf">Load shelves</button>
             <table class="Dashboard">  
                 <thead>
                     <tr>
@@ -36,24 +36,31 @@
                         <th>Lager status</th>
                         <th>Pakke typpe</th>
                         <th>M.A.C</th>
+                        <th>Actions</th>
                         
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="shelf in showShelfList">
                         <td>{{shelf.id}}</td>
-                        <td>{{shelf.isStocked}}</td>
+                        <td v-if="shelf.isStocked" style="color:green"><b>Fyldt</b></td>
+                        <td v-else="shelf.isStocked" style="color:red;background-color: rgb(245, 169, 169);"><em><b>Lav beholdning</b></em></td>
                         <td>{{shelf.packageTypeName}}</td>
                         <td>{{shelf.mac}}</td>
-                        
+                        <td>
+                            <button class="btn" id="delete" @click="deleteShelf(shelf.mac)">Delete</button>
+                            <button id="update" class="btn" @click="addPT">Update packagetype </button> <br>
+                        </td>
                     </tr>
                 </tbody>
             </table>
-
             <br>
+
             <div class="float-container">
                 <div class="float-child">
                     <h1>Package types</h1>
+                    <button id="add" class="btn" @click="addPT">Add </button> <br><br>
+                    <button class="btn" @click="getAllPT">Load shelves</button>
                     <table class="DashboardPT">  
                         <thead>
                             <tr>
@@ -64,9 +71,11 @@
                         </thead>
                         <tbody>
                             <tr v-for="pt in showPTList">
-                                <td>{{pt.Name}}</td>
-                                <td>{{pt.Description}}</td>
-                                <td></td>
+                                <td>{{pt.name}}</td>
+                                <td>{{pt.description}}</td>
+                                <td>
+                                    <button class="btn" id="delete" @click="deleteShelf(shelf.mac)">Delete</button> <br>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
