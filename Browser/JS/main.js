@@ -12,7 +12,9 @@ const app = Vue.createApp({
             newptName:'',
             PTInDB:[],
             showPTList:[],
-            PT:[]
+            PT:[],
+            ptNewDescription:[],
+            ptNewName:[]
 
 
         }
@@ -51,7 +53,8 @@ const app = Vue.createApp({
         },
         UpdateShelfPackagtype(mac){
             console.log("Er i metoden UpdateShelf")
-            axios.update(baseURLShelf+mac+'/'+newptName)
+            console.log(this.newptName)
+            axios.put(baseURLShelf+mac+'/'+this.newptName)
             .then(
                 response =>{
                     console.log(response)
@@ -62,6 +65,21 @@ const app = Vue.createApp({
                 }
             )
             this.getAllShelf()
+        },
+        getShelfFromMac(mac){
+            console.log("Er i metoden GetShelfFromMac")
+            axios.get(baseURLShelf+mac)
+            .then(
+                response=>{
+                    console.log(response.data)
+                    this.shelf = response.data
+                }
+            ).catch(
+                error=>{
+                    console.log(error)
+                }
+            )
+            console.log("Færdig i metoden GetAllShelf")
         },
 
         //Methods usign Packagetype
@@ -83,20 +101,53 @@ const app = Vue.createApp({
 
         },
         addPT(){
-            console.log("Er i metoden xxx")
+            console.log("Er i metoden addPT")
+            axios.post(baseURLPt,{"name":this.ptNewName,"description":this.ptNewDescription})
+            .then( response =>{
+                console.log(response)
+            }).catch(
+                error=>{
+                    console.log(error)
+                }
+            )
+            console.log("Færdig i metoden addPT")
+            this.getAllPT()
         },
-        deletePT(){
-            console.log("Er i metoden xxx")
-
-
+        deletePT(name){
+            console.log("Er i metoden deletePT")
+            axios.delete(baseURLPt+name).then(
+                response=>{
+                    console.log(response)
+                }
+            ).catch(
+                error=>{
+                    console.log(error)
+                }
+            )
+            console.log("Færdig i metoden deletePT")
+            this.getAllPT()
         },
         updatePT(){
             console.log("Er i metoden xxx")
 
         },
-        getPTByName(){
-            console.log("Er i metoden xxx")
-
+        getPTByName(name){
+            console.log("Er i metoden GetPtByName")
+            console.log(name)
+            axios.get(baseURLPt+name)
+            .then(
+                response=>{
+                    console.log(response.data)
+                    this.PT = response.data
+                    this.ptNewDescription=this.PT.description
+                }
+            ).catch(
+                error=>{
+                    console.log(error)
+                }
+            )
+            console.log(this.ptNewDescription)
+            console.log("Færdig i metoden GetPtByName")
         }
         ,
         //Methods for filthering
