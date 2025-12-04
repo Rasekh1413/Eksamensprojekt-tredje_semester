@@ -128,7 +128,19 @@ const app = Vue.createApp({
             this.getAllPT()
         },
         updatePT(){
-            console.log("Er i metoden xxx")
+            console.log("Er i metoden UpdatePT")
+            console.log(this.ptNewDescription)
+            axios.put("http://localhost:5155/api/PackageType",{"name":this.PT.name,"description":this.ptNewDescription})
+            .then(
+                response =>{
+                    console.log(response)
+                }
+            ).catch(
+                error=>{
+                    console.log(error)
+                }
+            )
+            this.getAllPT()
 
         },
         getPTByName(name){
