@@ -54,11 +54,10 @@
                 </tbody>
             </table>
             <br>
-            <div class="ActionContainer">
+            <div v-if="shelf" class="ActionContainer">
                 <h2>Actions</h2>
-                <br>
-                <p>Shelf: {{shelf.id}}</p>
-                <p>Info:{{shelf.packageTypeName}},{{shelf.isStocked}},{{shelf.mac}}</p>
+                <p >Shelf: {{shelf.id}} <br>Info:{{shelf.packageTypeName}},{{shelf.isStocked}},{{shelf.mac}}</p>
+                
                 <label for="cars">Choose a package type:</label>
                 <select name="allPt" id="pt" v-model="newptName">
                     <div v-for="pt in showPTList">
@@ -67,6 +66,10 @@
                 </select><br>
                 <button class="btn" id="delete" @click="deleteShelf(shelf.mac)">Delete</button>
                 <button id="update" class="btn" @click="UpdateShelfPackagtype(shelf.mac)">Update packagetype </button> <br>
+            </div>
+            <div v-else class="ActionContainer">
+                <h2>Actions</h2>
+                <p v-else>Select an item from the dashborad, to acces the actions</p>
             </div>
 
             <div class="float-container">
