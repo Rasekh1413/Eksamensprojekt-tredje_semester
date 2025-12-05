@@ -48,7 +48,10 @@
             <td>{{shelf.packageTypeName}}</td>
             <td>{{shelf.mac}}</td>
             <td>
-                <input type="radio" name="selectObject" @click="getShelfFromMac(shelf.mac)"/>
+                <input type="radio"
+               name="selectObject"
+               :checked="selectedShelf === shelf.mac"
+               @click="toggleSelectionShelf(shelf.mac)" />
             </td>
         </tr>
         </tbody>
@@ -90,7 +93,7 @@
                     <td>{{pt.name}}</td>
                     <td>{{pt.description}}</td>
                     <td>
-                        <input type="radio" name="selectObject" @click="getPTByName(pt.name)"/>
+                        <input type="radio"name="selectObject" :checked="selectedPT === pt.name" @click="toggleSelectionPT(pt.name)" />
                     </td>
                 </tr>
                 </tbody>

@@ -15,7 +15,8 @@ const app = Vue.createApp({
             PT: [],
             ptNewDescription: [],
             ptNewName: [],
-            Test: ''
+            selectedShelf:null,
+            selectedPT:null,
         }
     },
 
@@ -57,6 +58,17 @@ const app = Vue.createApp({
                     this.shelf = response.data;
                 })
                 .catch(error => { console.log(error); });
+        },
+        toggleSelectionShelf(mac){
+            if(this.selectedShelf===mac){
+                this.selectedShelf=null
+                this.shelf=''
+            }
+            else{
+                this.selectedShelf=mac
+                this.getShelfFromMac(mac)
+            }
+
         },
 
         // Methods using PackageType
@@ -108,11 +120,25 @@ const app = Vue.createApp({
                 .catch(error => { console.log(error); });
             console.log(this.ptNewDescription);
             console.log("Færdig i metoden GetPtByName");
-        }
+        },
+            toggleSelectionPT(name){
+            console.log(name)
+            if(this.selectedPT===name){
+                this.selectedPT=null
+                this.PT=''
+                this.ptNewDescription=''
+                this.ptNewName=''
+            }
+            else{
+                this.selectedPT=name
+                this.getPTByName(name)
+            }
+        },
+
     },
 
-    // ✅ Auto-load on page load + auto-refresh every 10 seconds
-    mounted() {
+        // ✅ Auto-load on page load + auto-refresh every 10 seconds
+        mounted() {
         // Load immediately when the page loads
         this.getAllShelf();
         this.getAllPT();
