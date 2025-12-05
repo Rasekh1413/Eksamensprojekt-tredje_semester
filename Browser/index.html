@@ -16,6 +16,7 @@
         
         <!--Import vue-->
         <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
+
         <!--Import axios-->
         <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
     </head>
@@ -31,9 +32,9 @@
             <table class="Dashboard">  
                 <thead>
                     <tr>
-                        <th>Hylde nummer</th>
-                        <th>Lager status</th>
-                        <th>Pakke typpe</th>
+                        <th>Shelf number</th>
+                        <th>Stock status</th>
+                        <th>Package type</th>
                         <th>M.A.C</th>
                         <th>Select</th>
                         
@@ -42,8 +43,8 @@
                 <tbody>
                     <tr v-for="shelf in showShelfList">
                         <td>{{shelf.id}}</td>
-                        <td v-if="shelf.isStocked" style="color:green"><b>Fyldt</b></td>
-                        <td v-else="shelf.isStocked" style="color:red;background-color: rgb(245, 169, 169);"><em><b>Lav beholdning</b></em></td>
+                        <td v-if="shelf.isStocked" style="color:green"><b>Filled</b></td>
+                        <td v-else="shelf.isStocked" style="color:red;background-color: rgb(245, 169, 169);"><em><b>Low inventory</b></em></td>
                         <td>{{shelf.packageTypeName}}</td>
                         <td>{{shelf.mac}}</td>
                         <td>
@@ -101,14 +102,14 @@
                 <h2>Actions</h2>
                 <br>
                 <p>Packagetype: {{PT.name}}</p>
-                <input type="text" placeholder="Name" v-model="ptNewName">
-                <p class="alert" v-if="ptNewName.length > 15">Too long</p>
+                <input v-if="!PT||PT==''"type="text" maxlength="15" placeholder="Name" v-model="ptNewName">
+                <input v-else readonly type="text" maxlength="15" placeholder="Name" v-model="ptNewName">
+
+                <br><br>
+                <textarea cols="50" rows="5" maxlength="225" placeholder="Description" v-model="ptNewDescription"></textarea>
                 <br>
-                <input type="text" placeholder="Description" v-model="ptNewDescription">
-                <p class="alert" v-if="ptNewDescription.length > 255">Too long</p>
                 <br>
-                <br>
-                <button id="add" class="btn" @click="addPT">Add </button>
+                <button v-if="!PT||PT==''"id="add" class="btn" @click="addPT">Add </button>
                 <button class="btn" id="delete" @click="deletePT(PT.name)">Delete</button>
                 <button id="update" class="btn" @click="updatePT">Update packagetype </button> <br>
             </div>
@@ -121,7 +122,6 @@
         <script>
             const mountedApp = app.mount('#app')
         </script>
-
         <!--Importer map.js-->
         <script src="JS/map.js"></script>
         

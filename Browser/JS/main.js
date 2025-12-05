@@ -14,7 +14,8 @@ const app = Vue.createApp({
             showPTList:[],
             PT:[],
             ptNewDescription:[],
-            ptNewName:[]
+            ptNewName:[],
+            Test:''
 
 
         }
@@ -152,6 +153,7 @@ const app = Vue.createApp({
                     console.log(response.data)
                     this.PT = response.data
                     this.ptNewDescription=this.PT.description
+                    this.ptNewName=this.PT.name
                 }
             ).catch(
                 error=>{
