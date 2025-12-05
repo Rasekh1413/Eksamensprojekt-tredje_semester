@@ -14,7 +14,8 @@ const app = Vue.createApp({
             showPTList: [],
             PT: [],
             ptNewDescription: [],
-            ptNewName: []
+            ptNewName: [],
+            Test: ''
         }
     },
 
@@ -23,21 +24,19 @@ const app = Vue.createApp({
         getAllShelf() {
             console.log("Er i metoden GetAllShelf");
             axios.get(baseURLShelf)
-            .then(response => {
-                console.log(response.data);
-                this.shelfInDB = response.data;
-                this.showShelfList = this.shelfInDB;
-            })
-            .catch(error => {
-                console.log(error);
-            });
+                .then(response => {
+                    console.log(response.data);
+                    this.shelfInDB = response.data;
+                    this.showShelfList = this.shelfInDB;
+                })
+                .catch(error => { console.log(error); });
         },
 
         deleteShelf(mac) {
             console.log("Er i metoden DeleteShelf");
             axios.delete(baseURLShelf + mac)
-            .then(response => { console.log(response); })
-            .catch(error => { console.log(error); });
+                .then(response => { console.log(response); })
+                .catch(error => { console.log(error); });
             this.getAllShelf();
         },
 
@@ -45,66 +44,70 @@ const app = Vue.createApp({
             console.log("Er i metoden UpdateShelf");
             console.log(this.newptName);
             axios.put(baseURLShelf + mac + '/' + this.newptName)
-            .then(response => { console.log(response); })
-            .catch(error => { console.log(error); });
+                .then(response => { console.log(response); })
+                .catch(error => { console.log(error); });
             this.getAllShelf();
         },
 
         getShelfFromMac(mac) {
             console.log("Er i metoden GetShelfFromMac");
             axios.get(baseURLShelf + mac)
-            .then(response => {
-                console.log(response.data);
-                this.shelf = response.data;
-            })
-            .catch(error => { console.log(error); });
+                .then(response => {
+                    console.log(response.data);
+                    this.shelf = response.data;
+                })
+                .catch(error => { console.log(error); });
         },
 
         // Methods using PackageType
         getAllPT() {
             console.log("Er i metoden GetAllPt");
             axios.get(baseURLPt)
-            .then(response => {
-                console.log(response.data);
-                this.PTInDB = response.data;
-                this.showPTList = this.PTInDB;
-            })
-            .catch(error => { console.log(error); });
+                .then(response => {
+                    console.log(response.data);
+                    this.PTInDB = response.data;
+                    this.showPTList = this.PTInDB;
+                })
+                .catch(error => { console.log(error); });
         },
 
         addPT() {
             console.log("Er i metoden addPT");
             axios.post(baseURLPt, { "name": this.ptNewName, "description": this.ptNewDescription })
-            .then(response => { console.log(response); })
-            .catch(error => { console.log(error); });
+                .then(response => { console.log(response); })
+                .catch(error => { console.log(error); });
             this.getAllPT();
         },
 
         deletePT(name) {
             console.log("Er i metoden deletePT");
             axios.delete(baseURLPt + name)
-            .then(response => { console.log(response); })
-            .catch(error => { console.log(error); });
+                .then(response => { console.log(response); })
+                .catch(error => { console.log(error); });
             this.getAllPT();
         },
 
         updatePT() {
             console.log("Er i metoden UpdatePT");
             axios.put(baseURLPt, { "name": this.PT.name, "description": this.ptNewDescription })
-            .then(response => { console.log(response); })
-            .catch(error => { console.log(error); });
+                .then(response => { console.log(response); })
+                .catch(error => { console.log(error); });
             this.getAllPT();
         },
 
         getPTByName(name) {
             console.log("Er i metoden GetPtByName");
+            console.log(name);
             axios.get(baseURLPt + name)
-            .then(response => {
-                console.log(response.data);
-                this.PT = response.data;
-                this.ptNewDescription = this.PT.description;
-            })
-            .catch(error => { console.log(error); });
+                .then(response => {
+                    console.log(response.data);
+                    this.PT = response.data;
+                    this.ptNewDescription = this.PT.description;
+                    this.ptNewName = this.PT.name;
+                })
+                .catch(error => { console.log(error); });
+            console.log(this.ptNewDescription);
+            console.log("Færdig i metoden GetPtByName");
         }
     },
 

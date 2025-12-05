@@ -28,13 +28,14 @@
 </div>
 
 <div id="app">
+    <!-- Shelves Table -->
     <button class="btn" @click="getAllShelf">Load shelves</button>
     <table class="Dashboard">
         <thead>
         <tr>
-            <th>Hylde nummer</th>
-            <th>Lager status</th>
-            <th>Pakke typpe</th>
+            <th>Shelf number</th>
+            <th>Stock status</th>
+            <th>Package type</th>
             <th>M.A.C</th>
             <th>Select</th>
         </tr>
@@ -42,8 +43,8 @@
         <tbody>
         <tr v-for="shelf in showShelfList" :key="shelf.id">
             <td>{{shelf.id}}</td>
-            <td v-if="shelf.isStocked" style="color:green"><b>Fyldt</b></td>
-            <td v-else style="color:red;background-color: rgb(245, 169, 169);"><em><b>Lav beholdning</b></em></td>
+            <td v-if="shelf.isStocked" style="color:green"><b>Filled</b></td>
+            <td v-else style="color:red;background-color: rgb(245, 169, 169);"><em><b>Low inventory</b></em></td>
             <td>{{shelf.packageTypeName}}</td>
             <td>{{shelf.mac}}</td>
             <td>
@@ -53,11 +54,10 @@
         </tbody>
     </table>
 
-    <br>
-    <div class="ActionContainer">
+    <!-- Shelf Actions -->
+    <div v-if="shelf" class="ActionContainer">
         <h2>Actions</h2>
-        <p>Shelf: {{shelf.id}}</p>
-        <p>Info: {{shelf.packageTypeName}}, {{shelf.isStocked}}, {{shelf.mac}}</p>
+        <p>Shelf: {{shelf.id}} <br>Info: {{shelf.packageTypeName}}, {{shelf.isStocked}}, {{shelf.mac}}</p>
 
         <label for="pt">Choose a package type:</label>
         <select name="allPt" id="pt" v-model="newptName">
@@ -65,13 +65,18 @@
         </select><br>
 
         <button class="btn" id="delete" @click="deleteShelf(shelf.mac)">Delete</button>
-        <button id="update" class="btn" @click="UpdateShelfPackagtype(shelf.mac)">Update packagetype</button><br>
+        <button id="update" class="btn" @click="UpdateShelfPackagtype(shelf.mac)">Update packagetype</button>
+    </div>
+    <div v-else class="ActionContainer">
+        <h2>Actions</h2>
+        <p>Select an item from the dashboard to access the actions</p>
     </div>
 
+    <!-- Package Types Table -->
     <div class="float-container">
         <div class="float-child">
             <h1>Package types</h1>
-            <button class="btn" @click="getAllPT">Load shelves</button>
+            <button class="btn" @click="getAllPT">Load package types</button>
             <table class="DashboardPT">
                 <thead>
                 <tr>
@@ -94,25 +99,25 @@
         <div id="map"></div>
     </div>
 
+    <!-- Package Type Actions -->
     <div class="ActionContainer">
         <h2>Actions</h2>
         <p>Packagetype: {{PT.name}}</p>
-        <input type="text" placeholder="Name" v-model="ptNewName">
-        <p class="alert" v-if="ptNewName.length > 15">Too long</p><br>
 
-        <input type="text" placeholder="Description" v-model="ptNewDescription">
-        <p class="alert" v-if="ptNewDescription.length > 255">Too long</p><br><br>
+        <input v-if="!PT || PT==''" type="text" maxlength="15" placeholder="Name" v-model="ptNewName">
+        <input v-else readonly type="text" maxlength="15" placeholder="Name" v-model="ptNewName">
 
-        <button id="add" class="btn" @click="addPT">Add</button>
+        <br><br>
+        <textarea cols="50" rows="5" maxlength="225" placeholder="Description" v-model="ptNewDescription"></textarea>
+        <br><br>
+        <button v-if="!PT || PT==''" id="add" class="btn" @click="addPT">Add</button>
         <button class="btn" id="delete" @click="deletePT(PT.name)">Delete</button>
-        <button id="update" class="btn" @click="updatePT">Update packagetype</button><br>
+        <button id="update" class="btn" @click="updatePT">Update packagetype</button>
     </div>
 </div>
 
-<!-- Import main.js -->
+<!-- Scripts -->
 <script src="JS/main.js"></script>
-
-<!-- Import map.js -->
 <script src="JS/map.js"></script>
 </body>
 </html>
