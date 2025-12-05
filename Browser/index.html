@@ -103,8 +103,7 @@
 
             <div class="ActionContainer">
                 <h2>Actions</h2>
-                <br>
-                <p>Packagetype: {{PT.name}}</p>
+                <p v-if="PT.name">Packagetype: {{PT.name}}</p>
                 <input v-if="!PT||PT==''"type="text" maxlength="15" placeholder="Name" v-model="ptNewName">
                 <input v-else readonly type="text" maxlength="15" placeholder="Name" v-model="ptNewName">
 
@@ -116,7 +115,6 @@
                 <button class="btn" id="delete" @click="deletePT(PT.name)">Delete</button>
                 <button id="update" class="btn" @click="updatePT">Update packagetype </button> <br>
             </div>
-
         </div>
         <!--Import app-->
         <script src="Js/main.js"></script>
