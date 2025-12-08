@@ -40,7 +40,7 @@ namespace LagerStatusEksamen.Services
                     // error occurs when FK is null
                     bool isNull = shelf.PackageTypeName == null;
                     string packageTypeName = isNull ? "null" : "@PackageTypeName";
-                    string insertSql = $"INSERT INTO Shelves(MAC, PackageTypeName, IsStocked) Values(@MAC, {packageTypeName}, @IsStocked)";
+                    string insertSql = $"INSERT INTO Shelves(IsStocked, MAC, PackageTypeName) Values(@IsStocked, @MAC, {packageTypeName})";
                     
                     SqlCommand command = new SqlCommand(insertSql, connection);
                     command.Parameters.AddWithValue("MAC", shelf.MAC);
