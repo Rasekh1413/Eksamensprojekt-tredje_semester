@@ -143,11 +143,11 @@ const app = Vue.createApp({
 
         },
         //Sortering af Shelf
-        sortShelfPTAZ(){
+        sortShelfPTAsc(){
             this.showShelfList.sort((shelfPt1, shelfPt2) => shelfPt1.packageTypeName.localeCompare(shelfPt2.packageTypeName))
         },
         //Sortering af Shelf
-        sortShelfPTZA(){
+        sortShelfPTDesc(){
             this.showShelfList.sort((shelfPt1, shelfPt2) => shelfPt2.packageTypeName.localeCompare(shelfPt1.packageTypeName))
         },
         sortShelfDecending(){
