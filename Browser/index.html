@@ -38,6 +38,13 @@
     <p> <b>Sort by shelf id:</b></p>
     <input type="radio" name="selectObject"  @click="sortShelfNumberAsc" /> Acending<br>
     <input type="radio" name="selectObject"  @click="sortShelfNumberDesc" /> Decending
+    <br>
+    <br>
+    <label><b>Chose a stock status:</b></label>
+        <select name="allStock" id="pt" v-model="chosenStatus">
+            <option  value="Full">Full</option>
+            <option  value="Low">LoW</option>
+        </select><br>
 
     <table class="Dashboard">
         <thead>

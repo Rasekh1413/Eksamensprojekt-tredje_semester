@@ -25,6 +25,7 @@ const app = Vue.createApp({
             ptNewName: [],
             selectedShelf:null,
             selectedPT:null,
+            chosenStatus:''
         }
     },
     methods: {
@@ -150,6 +151,9 @@ const app = Vue.createApp({
         filterPt(){
 
         },
+        filterStatus(){
+
+        },
         //Sortering af Shelf
         sortShelfPTAsc(){
             sortBy=SortShelfPTAsc
@@ -189,6 +193,7 @@ const app = Vue.createApp({
             this.showShelfList.sort((shelf1, shelf2) => shelf2.id - shelf1.id)
         },
         sortShelf(){
+            
             if(sortBy==SortShelfPTAsc)
             {
                 this.sortShelfPTAsc()
