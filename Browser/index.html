@@ -1,102 +1,126 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8"/>
-        <!---Import styles-->
-        <link rel="stylesheet" href="./CSS/styles.css"/>
-        
-        <!--Import quick leave css-->
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-        crossorigin=""/>
-        <!-- Make sure you put this AFTER Leaflet's CSS -->
-        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-        crossorigin=""></script>
-        
-        <!--Import vue-->
-        <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
-        <!--Import axios-->
-        <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+<head>
+    <meta charset="UTF-8"/>
+    <!---Import styles-->
+    <link rel="stylesheet" href="./CSS/styles.css"/>
 
-    </head>
-    <body>
-        <div class="topnav">
-            <a class="active" href="#home">Self care-And share: Lager</a>
-            <a href="#news">News</a>
-            <a href="#contact">Contact</a>
-            <a href="#about">About</a>
-        </div>
-        <div id="app">
-            <button class="btn" @click="getAllShelf">Load shelves</button>
-            <table class="Dashboard">  
+    <!--Import Leaflet CSS-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+
+    <!--Import Vue-->
+    <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
+    <!--Import Axios-->
+    <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+</head>
+<body>
+<div class="topnav">
+    <a class="active" href="#home">Self care-And share: Lager</a>
+    <a href="#news">News</a>
+    <a href="#contact">Contact</a>
+    <a href="#about">About</a>
+</div>
+
+<div id="app">
+    <!-- Shelves Table -->
+    <button class="btn" @click="getAllShelf">Load shelves</button>
+    <table class="Dashboard">
+        <thead>
+        <tr>
+            <th>Shelf number</th>
+            <th>Stock status</th>
+            <th>Package type</th>
+            <th>M.A.C</th>
+            <th>Select</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="shelf in showShelfList" :key="shelf.id">
+            <td>{{shelf.id}}</td>
+            <td v-if="shelf.isStocked" style="color:green"><b>Filled</b></td>
+            <td v-else style="color:red;background-color: rgb(245, 169, 169);"><em><b>Low inventory</b></em></td>
+            <td>{{shelf.packageTypeName}}</td>
+            <td>{{shelf.mac}}</td>
+            <td>
+                <input type="radio"
+               name="selectObject"
+               :checked="selectedShelf === shelf.mac"
+               @click="toggleSelectionShelf(shelf.mac)" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Shelf Actions -->
+    <div v-if="shelf" class="ActionContainer">
+        <h2>Actions</h2>
+        <p>Shelf: {{shelf.id}} <br>Info: {{shelf.packageTypeName}}, {{shelf.isStocked}}, {{shelf.mac}}</p>
+
+        <label for="pt">Choose a package type:</label>
+        <select name="allPt" id="pt" v-model="newptName">
+            <option v-for="pt in showPTList" :key="pt.name" :value="pt.name">{{pt.name}}</option>
+        </select><br>
+
+        <button class="btn" id="delete" @click="deleteShelf(shelf.mac)">Delete</button>
+        <button id="update" class="btn" @click="UpdateShelfPackagtype(shelf.mac)">Update packagetype</button>
+    </div>
+    <div v-else class="ActionContainer">
+        <h2>Actions</h2>
+        <p>Select an item from the dashboard to access the actions</p>
+    </div>
+
+    <!-- Package Types Table -->
+    <div class="float-container">
+        <div class="float-child">
+            <h1>Package types</h1>
+            <button class="btn" @click="getAllPT">Load package types</button>
+            <table class="DashboardPT">
                 <thead>
-                    <tr>
-                        <th>Hylde nummer</th>
-                        <th>Lager status</th>
-                        <th>Pakke typpe</th>
-                        <th>M.A.C</th>
-                        <th>Actions</th>
-                        
-                    </tr>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="shelf in showShelfList">
-                        <td>{{shelf.id}}</td>
-                        <td v-if="shelf.isStocked" style="color:green"><b>Fyldt</b></td>
-                        <td v-else="shelf.isStocked" style="color:red;background-color: rgb(245, 169, 169);"><em><b>Lav beholdning</b></em></td>
-                        <td>{{shelf.packageTypeName}}</td>
-                        <td>{{shelf.mac}}</td>
-                        <td>
-                            <button class="btn" id="delete" @click="deleteShelf(shelf.mac)" onclick="return confirm('Vil du gerne slette denne vare fra inventar?');">Delete</button>
-                            <button id="update" class="btn" @click="addPT">Update packagetype </button> <br>
-                        </td>
-                    </tr>
+                <tr v-for="pt in showPTList" :key="pt.name">
+                    <td>{{pt.name}}</td>
+                    <td>{{pt.description}}</td>
+                    <td>
+                        <input type="radio"name="selectObject" :checked="selectedPT === pt.name" @click="toggleSelectionPT(pt.name)" />
+                    </td>
+                </tr>
                 </tbody>
             </table>
-            <br>
-
-            <div class="float-container">
-                <div class="float-child">
-                    <h1>Package types</h1>
-                    <button id="add" class="btn" @click="addPT">Add </button> <br><br>
-                    <button class="btn" @click="getAllPT">Load shelves</button>
-                    <table class="DashboardPT">  
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="pt in showPTList">
-                                <td>{{pt.name}}</td>
-                                <td>{{pt.description}}</td>
-                                <td>
-                                    <button class="btn" id="delete" @click="deleteShelf(shelf.mac)">Delete</button> <br>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-                <div id="map">
-
-                </div>
-            </div>
-
         </div>
-        <!--Import app-->
-        <script src="Js/main.js"></script>
-        
-        <!--Mount app-->
-        <script>
-            const mountedApp = app.mount('#app')
-        </script>
+        <div id="map"></div>
+    </div>
 
-        <!--Importer map.js-->
-        <script src="JS/map.js"></script>
-        
-    </body>
+    <!-- Package Type Actions -->
+    <div class="ActionContainer">
+        <h2>Actions</h2>
+        <p v-if="PT.name">Packagetype: {{PT.name}}</p>
+
+        <input v-if="!PT || PT==''" type="text" maxlength="15" placeholder="Name" v-model="ptNewName">
+        <input v-else readonly type="text" maxlength="15" placeholder="Name" v-model="ptNewName">
+
+        <br><br>
+        <textarea cols="50" rows="5" maxlength="225" placeholder="Description" v-model="ptNewDescription"></textarea>
+        <br><br>
+        <button v-if="!PT || PT==''" id="add" class="btn" @click="addPT">Add</button>
+        <button class="btn" id="delete" @click="deletePT(PT.name)">Delete</button>
+        <button id="update" class="btn" @click="updatePT">Update packagetype</button>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="JS/main.js"></script>
+<script src="JS/map.js"></script>
+</body>
 </html>

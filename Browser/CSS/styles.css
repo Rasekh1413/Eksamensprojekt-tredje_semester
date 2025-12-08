@@ -22,6 +22,9 @@ body{
     
 }
 
+.alert{
+  color:red
+}
 
 /*Style af knapper*/
 .btn{
@@ -32,17 +35,17 @@ body{
 }
 
 #delete{
-  color: red;
+  background-color: rgb(220, 80, 80);
   border-color: red;
 }
 
 #add{
-  color: green;
+  background-color: green;
   border-color: green;
 }
 
 #update{
-  color: orange;
+  background-color: rgb(240, 175, 54);
   border-color: orange;
 }
 
@@ -75,7 +78,7 @@ body{
 }
 
 
-/*Style af elementerne i en tebel*/
+/*Style af elementerne i en tabel*/
 
 thead {
   background-color:#03999e;
@@ -127,4 +130,14 @@ farve og musen bliver en pointer*/
 .float-child{
     width: 45%;
     float: left;
+}
+.ActionContainer{
+  display: flexbox;
+  border: 2px solid orange;
+  background-color: rgb(241, 206, 141);
+  padding:10px;
+  padding-top:0 px;
+  align-items: center;
+  width:60%;
+  border-radius:10px;
 }
