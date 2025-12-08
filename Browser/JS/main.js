@@ -19,7 +19,6 @@ const app = Vue.createApp({
             selectedPT:null,
         }
     },
-
     methods: {
         // Methods using shelf
         getAllShelf() {
@@ -102,7 +101,12 @@ const app = Vue.createApp({
         updatePT() {
             console.log("Er i metoden UpdatePT");
             axios.put(baseURLPt, { "name": this.PT.name, "description": this.ptNewDescription })
-                .then(response => { console.log(response); })
+                .then(response => 
+                    { 
+                        console.log(response); 
+                        this.ptNewDescription=''
+                        this.ptNewName=''
+                    })
                 .catch(error => { console.log(error); });
             this.getAllPT();
         },
