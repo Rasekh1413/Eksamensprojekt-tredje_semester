@@ -138,6 +138,29 @@ const app = Vue.createApp({
                 this.getPTByName(name)
             }
         },
+        //Filtrering af shelf (Bind: ptNewName)
+        filterPt(){
+
+        },
+        //Sortering af Shelf
+        sortShelfPTAZ(){
+            this.showShelfList.sort((shelfPt1, shelfPt2) => shelfPt1.packageTypeName.localeCompare(shelfPt2.packageTypeName))
+        },
+        //Sortering af Shelf
+        sortShelfPTZA(){
+            this.showShelfList.sort((shelfPt1, shelfPt2) => shelfPt2.packageTypeName.localeCompare(shelfPt1.packageTypeName))
+        },
+        sortShelfDecending(){
+
+        },
+        //Sortering af Shelf
+        sortShelfAsending(){
+
+        }
+
+
+
+
 
     },
 
