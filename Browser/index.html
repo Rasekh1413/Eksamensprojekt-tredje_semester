@@ -30,9 +30,14 @@
 <div id="app">
     <!-- Shelves Table -->
     <button class="btn" @click="getAllShelf">Load shelves</button>
-    <p>Sort packagetype:</p>
+    <p> <b>Sort by packagetype:</b></p>
     <input type="radio" name="selectObject"  @click="sortShelfPTAsc" /> A-Z<br>
     <input type="radio" name="selectObject"  @click="sortShelfPTDesc" /> Z-A
+
+
+    <p> <b>Sort by shelf id:</b></p>
+    <input type="radio" name="selectObject"  @click="sortShelfNumberAsc" /> Acending<br>
+    <input type="radio" name="selectObject"  @click="sortShelfNumberDesc" /> Decending
 
     <table class="Dashboard">
         <thead>

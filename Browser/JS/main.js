@@ -3,6 +3,14 @@ const baseURL = 'http://localhost:5155/api/';
 const baseURLShelf = baseURL + 'Shelf/';
 const baseURLPt = baseURL + 'PackageType/';
 
+const SortShelfPTAsc='sortShelfPTAsc'
+const SortShelfPTDesc='sortShelfPTDesc'
+const SortShelfNumberAsc='sortShelfNumberAsc'
+const SortShelfNumberDesc='sortShelfNumberDesc'
+
+var sortBy =''
+
+
 const app = Vue.createApp({
     data() {
         return {
@@ -144,24 +152,60 @@ const app = Vue.createApp({
         },
         //Sortering af Shelf
         sortShelfPTAsc(){
-            this.showShelfList.sort((shelfPt1, shelfPt2) => shelfPt1.packageTypeName.localeCompare(shelfPt2.packageTypeName))
+            sortBy=SortShelfPTAsc
+            let obj1 = []
+
+            //Objekter uden null værdi tilføjes til arrayet og sorteres
+            for (const obj2 of this.showShelfList)
+            {
+                if (obj2.packageTypeName != null)
+                {
+                    obj1.push(obj2)
+                }
+            }
+            obj1.sort((shelfPt1, shelfPt2) => shelfPt1.packageTypeName.localeCompare(shelfPt2.packageTypeName))
+
+            //Objekterne med null tilføjes til listen
+            for (const obj2 of this.showShelfList)
+            {
+                if (obj2.packageTypeName == null)
+                {
+                    obj1.push(obj2)
+                }
+            }
+            this.showShelfList = obj1
         },
-        //Sortering af Shelf
         sortShelfPTDesc(){
-            this.showShelfList.sort((shelfPt1, shelfPt2) => shelfPt2.packageTypeName.localeCompare(shelfPt1.packageTypeName))
+            sortBy=SortShelfPTDesc
+            this.sortShelfPTAsc()
+            this.showShelfList.reverse()
         },
-        sortShelfDecending(){
-
+        sortShelfNumberAsc(){
+            sortBy=SortShelfNumberAsc
+            this.showShelfList.sort((shelf1, shelf2) => shelf1.id - shelf2.id)
         },
-        //Sortering af Shelf
-        sortShelfAsending(){
-
-        }
-
-
-
-
-
+        sortShelfNumberDesc(){
+            sortBy=SortShelfNumberDesc
+            this.showShelfList.sort((shelf1, shelf2) => shelf2.id - shelf1.id)
+        },
+        sortShelf(){
+            if(sortBy==SortShelfPTAsc)
+            {
+                this.sortShelfPTAsc()
+            }
+            else if( sortBy==SortShelfPTDesc)
+            {
+                this.sortShelfPTDesc()
+            }
+            else if( sortBy==SortShelfNumberAsc)
+            {
+                this.sortShelfNumberAsc()
+            }
+            else if( sortBy==SortShelfNumberDesc)
+            {
+                this.sortShelfNumberDesc()
+            }
+        },
     },
 
         // ✅ Auto-load on page load + auto-refresh every 10 seconds
@@ -170,19 +214,26 @@ const app = Vue.createApp({
         this.getAllShelf();
         this.getAllPT();
 
+
         // Refresh shelves every 10 seconds
-        this.shelfTimer = setInterval(() => {
+        this.shelfTimer1 = setInterval(() => {
+            this.getAllPT();
             this.getAllShelf();
         }, 10000);
+        // Refresh sort every 10 miliseconds
+        this.shelfTimer2 = setInterval(() => {
+            this.sortShelf();
+        }, 10);
 
         // Refresh package types every 10 seconds
-        this.ptTimer = setInterval(() => {
+        /*this.ptTimer = setInterval(() => {
             this.getAllPT();
-        }, 10000);
+        }, 10000);*/
     },
 
     beforeUnmount() {
-        clearInterval(this.shelfTimer);
+        clearInterval(this.shelfTimer1);
+        clearInterval(this.shelfTimer2);
         clearInterval(this.ptTimer);
     }
 });
