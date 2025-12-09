@@ -49,6 +49,8 @@ body{
   border-color: orange;
 }
 
+input:checked {accent-color: rgb(33, 141, 191); background-color: rgb(255, 255, 255);}
+
 /* Add a black background color to the top navigation */
 .topnav {
   background-color: #03787c;
@@ -75,8 +77,8 @@ body{
 .topnav a.active {
   background-color: #0a6164;
   color: white;
+  font-size: 25px;
 }
-
 
 /*Style af elementerne i en tabel*/
 
@@ -105,7 +107,7 @@ farve og musen bliver en pointer*/
   cursor: pointer;
 }
 
-/*Style af tabellen til dashboard*/
+/*Style af tabeller (dashboard)*/
 .Dashboard{
     width: 75%;
     margin-top: 10px;
@@ -113,14 +115,6 @@ farve og musen bliver en pointer*/
     border-spacing: 0;
 }
 
-/* styles af tabel packagetypes*/
-.DashboardPT{
-    width: 100%;
-    margin-top: 10px;
-    font-family: Arial, sans-serif;
-    border-spacing: 0;
-    padding-right: 15px;
-}
 /*Gør så de 2 div'tags placeres vedsiden af hinanden*/
 .float-container{
   display: flex;
