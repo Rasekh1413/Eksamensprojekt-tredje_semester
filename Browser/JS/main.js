@@ -3,6 +3,18 @@ const baseURL = 'http://localhost:5155/api/';
 const baseURLShelf = baseURL + 'Shelf/';
 const baseURLPt = baseURL + 'PackageType/';
 
+const SortShelfPTAsc='sortShelfPTAsc'
+const SortShelfPTDesc='sortShelfPTDesc'
+const SortShelfNumberAsc='sortShelfNumberAsc'
+const SortShelfNumberDesc='sortShelfNumberDesc'
+
+const FilterPt='filterPt'
+const FilterStatus ='filterStatus'
+
+var sortBy =''
+var filterBy=''
+
+
 const app = Vue.createApp({
     data() {
         return {
@@ -17,6 +29,8 @@ const app = Vue.createApp({
             ptNewName: [],
             selectedShelf:null,
             selectedPT:null,
+            chosenStatus:'all',
+            chosenPt:'all'
         }
     },
     methods: {
@@ -28,6 +42,8 @@ const app = Vue.createApp({
                     console.log(response.data);
                     this.shelfInDB = response.data;
                     this.showShelfList = this.shelfInDB;
+                    this.filterShelf()
+                    this.sortShelf()
                 })
                 .catch(error => { console.log(error); });
         },
@@ -138,7 +154,86 @@ const app = Vue.createApp({
                 this.getPTByName(name)
             }
         },
+        //Filtrering af shelf (Bind: ptNewName)
+        filterPt(){
+            filterBy='filterPt'
+            console.log(this.chosenPt)
+            if(this.chosenPt!='all'){
+                this.showShelfList = this.showShelfList.filter(s=>s.packageTypeName==this.chosenPt)
+            }
+        },
+        filterStatus(){
+            filterBy=FilterStatus
+            console.log(this.chosenStatus)
 
+            if(this.chosenStatus != "all") 
+            {
+                this.showShelfList = this.showShelfList.filter(s=>s.isStocked==this.chosenStatus)
+            }
+            console.log(this.showShelfList)
+        },
+
+        //Sortering af Shelf
+        sortShelfPTAsc(){
+            sortBy=SortShelfPTAsc
+            let obj1 = []
+
+            //Objekter uden null værdi tilføjes til arrayet og sorteres
+            for (const obj2 of this.showShelfList)
+            {
+                if (obj2.packageTypeName != null)
+                {
+                    obj1.push(obj2)
+                }
+            }
+            obj1.sort((shelfPt1, shelfPt2) => shelfPt1.packageTypeName.localeCompare(shelfPt2.packageTypeName))
+
+            //Objekterne med null tilføjes til listen
+            for (const obj2 of this.showShelfList)
+            {
+                if (obj2.packageTypeName == null)
+                {
+                    obj1.push(obj2)
+                }
+            }
+            this.showShelfList = obj1
+        },
+        sortShelfPTDesc(){
+            sortBy=SortShelfPTDesc
+            this.sortShelfPTAsc()
+            this.showShelfList.reverse()
+        },
+        sortShelfNumberAsc(){
+            sortBy=SortShelfNumberAsc
+            this.showShelfList.sort((shelf1, shelf2) => shelf1.id - shelf2.id)
+        },
+        sortShelfNumberDesc(){
+            sortBy=SortShelfNumberDesc
+            this.showShelfList.sort((shelf1, shelf2) => shelf2.id - shelf1.id)
+        },
+        sortShelf(){
+            if(sortBy==SortShelfPTAsc)
+            {
+                this.sortShelfPTAsc()
+            }
+            else if( sortBy==SortShelfPTDesc)
+            {
+                this.sortShelfPTDesc()
+            }
+            else if( sortBy==SortShelfNumberAsc)
+            {
+                this.sortShelfNumberAsc()
+            }
+            else if( sortBy==SortShelfNumberDesc)
+            {
+                this.sortShelfNumberDesc()
+            }
+        },
+        filterShelf(){
+            this.showShelfList = this.shelfInDB
+            this.filterStatus()
+            this.filterPt()
+        }
     },
 
         // ✅ Auto-load on page load + auto-refresh every 10 seconds
@@ -147,19 +242,27 @@ const app = Vue.createApp({
         this.getAllShelf();
         this.getAllPT();
 
+
         // Refresh shelves every 10 seconds
-        this.shelfTimer = setInterval(() => {
+        this.shelfTimer1 = setInterval(() => {
+            this.getAllPT();
             this.getAllShelf();
-        }, 10000);
+        }, 1000);
+        // Refresh sort every 10 miliseconds
+        this.shelfTimer2 = setInterval(() => {
+            this.filterShelf()
+            this.sortShelf()
+        }, 100);
 
         // Refresh package types every 10 seconds
-        this.ptTimer = setInterval(() => {
+        /*this.ptTimer = setInterval(() => {
             this.getAllPT();
-        }, 10000);
+        }, 10000);*/
     },
 
     beforeUnmount() {
-        clearInterval(this.shelfTimer);
+        clearInterval(this.shelfTimer1);
+        clearInterval(this.shelfTimer2);
         clearInterval(this.ptTimer);
     }
 });
