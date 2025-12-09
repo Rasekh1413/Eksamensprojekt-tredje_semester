@@ -23,8 +23,9 @@ IWebElement loadTable = driver.FindElement(By.ClassName("btn"));
 Console.WriteLine("Button text: " + loadTable.Text);
 loadTable.Click();
 
-IWebElement selectUpdateAction = driver.FindElement(By.ClassName("ActionContainer")).FindElement(By.ClassName("#update"));
-selectUpdateAction.Click();
+IWebElement selectAction = driver.FindElement(By.Id("PackageTypeTable")).
+    FindElement(By.Name("selectObject"));
+selectAction.Click();
 
 Console.WriteLine("Process to quit driver.");
 Console.ReadLine();

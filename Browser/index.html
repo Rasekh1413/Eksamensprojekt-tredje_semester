@@ -50,7 +50,7 @@
         <option v-for="pt in showPTList" :key="pt.name" :value="pt.name">{{pt.name}}</option>
     </select><br>
 
-    <table class="Dashboard">
+    <table class="Dashboard" id="ShelfTable">
         <thead>
         <tr>
             <th>Shelf number</th>
@@ -96,9 +96,9 @@
     </div>
 
     <!-- Package Types Table -->        
-        <h1>Package types</h1>
-        <table class="Dashboard">
-            <thead>
+    <h1>Package types</h1>
+    <table class="Dashboard" id="PackageTypeTable">
+        <thead>
             <tr>
                 <th>Name</th>
                 <th>Description</th>
@@ -107,7 +107,7 @@
         </thead>
         <tbody>
             <tr v-for="pt in showPTList" :key="pt.name">
-                    <td>{{pt.name}}</td>
+                <td>{{pt.name}}</td>
                 <td>{{pt.description}}</td>
                 <td>
                     <input type="radio"name="selectObject" :checked="selectedPT === pt.name" @click="toggleSelectionPT(pt.name)" />
