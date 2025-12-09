@@ -11,15 +11,14 @@ public class SeleniumTesting
     {
         // Arrange
         FirefoxOptions options = new FirefoxOptions();
-        options.AddArguments("--headless=new()");
+        //options.AddArguments("--headless=new()");
 
         IWebDriver driver = new FirefoxDriver();
         driver.Navigate().GoToUrl(@"https://zealand3.rasekh.dk/");
 
-
         // Act
-        IWebElement buttonElement = driver.FindElement(By.Id("testButton1"));
-        var buttonText = buttonElement.Text;
+        IWebElement loadShelves = driver.FindElement(By.Name("Load shelves"));
+        var buttonText = loadShelves.Text;
 
         // Assert
         Assert.AreEqual("Click Me", buttonText);

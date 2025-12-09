@@ -14,21 +14,21 @@ driver.Navigate().GoToUrl(@"https://zealand3.rasekh.dk/");
 
 Console.WriteLine("driver url " + driver.Url);
 
-IWebElement inputElement = driver.FindElement(By.Id("input1"));
-inputElement.SendKeys("Hello FROM Katerina");
+//IWebElement inputElement = driver.FindElement(By.Id("input1"));
+//inputElement.SendKeys("Hello FROM Katerina");
 
-IWebElement buttonElement = driver.FindElement(By.Id("testButton1"));
-Console.WriteLine("Button text: " + buttonElement.Text);
-
-buttonElement.Click();
-
-IWebElement secondButtomElement = driver.FindElement(By.Id("testButton2"));
-secondButtomElement.Click();
+IWebElement loadsShelves = driver.FindElement(By.Name("Load shelves"));
+Console.WriteLine("Button text: " + loadsShelves.Text);
 
 for (int i = 0; i < 10; i++)
 {
-    secondButtomElement.Click();
+    loadsShelves.Click();
 }
+
+IWebElement loadPackageTypes = driver.FindElement(By.Name("Load package types"));
+loadPackageTypes.Click();
+
+
 
 Console.WriteLine("Process to quit driver.");
 Console.ReadLine();
