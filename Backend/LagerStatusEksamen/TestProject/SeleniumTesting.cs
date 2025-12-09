@@ -40,10 +40,11 @@ public class SeleniumTesting
         driver.Navigate().GoToUrl(@"https://zealand3.rasekh.dk/");
 
         // Act
-        IWebElement selectAction = driver.FindElement(By.ClassName("ActionContainer"));
-        selectAction.Click();
+        IWebElement selectAction = driver.FindElement(By.Id("PackageTypeTable")).
+            FindElement(By.Name("selectObject"));
+        var selectActionText = selectAction.Text;
 
         // Assert
-        
+        Assert.AreEqual("Jet the Hawk", selectActionText);
     }
 }
