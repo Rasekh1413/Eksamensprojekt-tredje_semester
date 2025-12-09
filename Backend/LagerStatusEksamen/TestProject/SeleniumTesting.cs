@@ -8,7 +8,7 @@ namespace TestProject;
 public class SeleniumTesting
 {
     [TestMethod]
-    public void TestButtonExistence()
+    public void TestAddButtonExistence()
     {
         // Arrange
         FirefoxOptions options = new FirefoxOptions();
@@ -24,7 +24,7 @@ public class SeleniumTesting
         var buttonText = loadShelves.Text;
 
         // Assert
-        Assert.AreEqual("Load shelves", buttonText);
+        Assert.AreEqual("Add", buttonText);
     }
 
     [TestMethod]
@@ -40,8 +40,8 @@ public class SeleniumTesting
         driver.Navigate().GoToUrl(@"https://zealand3.rasekh.dk/");
 
         // Act
-        IWebElement selectAction = driver.FindElement(By.Id("PackageTypeTable")).
-            FindElement(By.Name("selectObject"));
+        IWebElement selectAction = driver.FindElement(By.CssSelector("table.Dashboard"))
+            .FindElement(By.CssSelector("input[type='radio'][name='selectObject]'"));
         var selectActionText = selectAction.Text;
 
         // Assert
