@@ -1,4 +1,4 @@
-﻿using LagerStatusEksamen.Interfaces;
+﻿/*using LagerStatusEksamen.Interfaces;
 using LagerStatusEksamen.Models;
 using Microsoft.Extensions.Hosting;
 using System.Net;
@@ -67,5 +67,42 @@ namespace LagerStatusEksamen.Services
                 }
             }
         }
+    }
+}
+*/
+using LagerStatusEksamen.Interfaces;
+using LagerStatusEksamen.Models;
+using Microsoft.AspNetCore.Mvc;
+
+[ApiController]
+[Route("api/device")]
+public class DeviceController : ControllerBase
+{
+    private readonly IServiceShelf _db;
+
+    public DeviceController(IServiceShelf db)
+    {
+        _db = db;
+    }
+
+    [HttpPost("update")]
+    public IActionResult UpdateFromDevice([FromBody] DataPackage package)
+    {
+        if (package == null)
+            return BadRequest("Invalid payload");
+
+        var existing = _db.GetByMAC(package.MAC);
+        Shelf shelf;
+
+        if (existing != null)
+        {
+            shelf = _db.UpdateStatus(package.MAC, package.Status);
+        }
+        else
+        {
+            shelf = _db.Add(new Shelf(package.MAC, null, package.Status));
+        }
+
+        return Ok(new { message = "OK", stored = shelf });
     }
 }
