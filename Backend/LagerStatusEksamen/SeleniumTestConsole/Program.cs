@@ -17,18 +17,17 @@ Console.WriteLine("driver url " + driver.Url);
 //IWebElement inputElement = driver.FindElement(By.Id("input1"));
 //inputElement.SendKeys("Hello FROM Katerina");
 
-IWebElement loadsShelves = driver.FindElement(By.Name("Load shelves"));
+// I cannot see if the button is being clicked on, despite how the
+// button has a hover element and changes hue while clicked
+IWebElement loadsShelves = driver.FindElement(By.ClassName("btn"));
 Console.WriteLine("Button text: " + loadsShelves.Text);
+loadsShelves.Click();
 
-for (int i = 0; i < 10; i++)
-{
-    loadsShelves.Click();
-}
-
-IWebElement loadPackageTypes = driver.FindElement(By.Name("Load package types"));
+IWebElement loadPackageTypes = driver.FindElement(By.ClassName("btn"));
 loadPackageTypes.Click();
 
-
+IWebElement selectUpdateAction = driver.FindElement(By.ClassName("ActionContainer")).FindElement(By.ClassName("#update"));
+selectUpdateAction.Click();
 
 Console.WriteLine("Process to quit driver.");
 Console.ReadLine();
