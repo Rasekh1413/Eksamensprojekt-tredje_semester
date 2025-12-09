@@ -19,12 +19,9 @@ Console.WriteLine("driver url " + driver.Url);
 
 // I cannot see if the button is being clicked on, despite how the
 // button has a hover element and changes hue while clicked
-IWebElement loadsShelves = driver.FindElement(By.ClassName("btn"));
-Console.WriteLine("Button text: " + loadsShelves.Text);
-loadsShelves.Click();
-
-IWebElement loadPackageTypes = driver.FindElement(By.ClassName("btn"));
-loadPackageTypes.Click();
+IWebElement loadTable = driver.FindElement(By.ClassName("btn"));
+Console.WriteLine("Button text: " + loadTable.Text);
+loadTable.Click();
 
 IWebElement selectUpdateAction = driver.FindElement(By.ClassName("ActionContainer")).FindElement(By.ClassName("#update"));
 selectUpdateAction.Click();
