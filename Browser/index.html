@@ -21,15 +21,11 @@
 </head>
 <body>
 <div class="topnav">
-    <a class="active" href="#home">Self care-And share: Lager</a>
-    <a href="#news">News</a>
-    <a href="#contact">Contact</a>
-    <a href="#about">About</a>
+    <a class="active" href="#home">FunToys: Lager</a>
 </div>
 
 <div id="app">
     <!-- Shelves Table -->
-    <button class="btn" @click="getAllShelf">Load shelves</button>
     <p> <b>Sort by packagetype:</b></p>
     <input type="radio" name="selectObject"  @click="sortShelfPTAsc" /> A-Z<br>
     <input type="radio" name="selectObject"  @click="sortShelfPTDesc" /> Z-A
@@ -40,11 +36,19 @@
     <input type="radio" name="selectObject"  @click="sortShelfNumberDesc" /> Decending
     <br>
     <br>
-    <label><b>Chose a stock status:</b></label>
-        <select name="allStock" id="pt" v-model="chosenStatus">
-            <option  value="Full">Full</option>
-            <option  value="Low">LoW</option>
-        </select><br>
+    <label><b>Chose a stock status:  </b></label>
+    <select name="allStock" id="pt" v-model="chosenStatus" @click="filterStatus">
+        <option value="all">All</option>
+        <option  :value="true">Full</option>
+        <option  :value="false">Low</option>
+    </select><br>
+    <label for="pt"><b>Choose a package type:  </b></label>
+
+    <select name="allPt" id="pt" v-model="chosenPt" @click="filterPt">
+        <option value="all">All</option>
+        <option :value="null">Unassigned</option>
+        <option v-for="pt in showPTList" :key="pt.name" :value="pt.name">{{pt.name}}</option>
+    </select><br>
 
     <table class="Dashboard">
         <thead>
@@ -72,7 +76,7 @@
         </tr>
         </tbody>
     </table>
-
+    <br>
     <!-- Shelf Actions -->
     <div v-if="shelf" class="ActionContainer">
         <h2>Actions</h2>
@@ -91,48 +95,56 @@
         <p>Select an item from the dashboard to access the actions</p>
     </div>
 
-    <!-- Package Types Table -->
-    <div class="float-container">
-        <div class="float-child">
-            <h1>Package types</h1>
-            <button class="btn" @click="getAllPT">Load package types</button>
-            <table class="DashboardPT">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="pt in showPTList" :key="pt.name">
+    <!-- Package Types Table -->        
+        <h1>Package types</h1>
+        <table class="Dashboard">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="pt in showPTList" :key="pt.name">
                     <td>{{pt.name}}</td>
-                    <td>{{pt.description}}</td>
-                    <td>
-                        <input type="radio"name="selectObject" :checked="selectedPT === pt.name" @click="toggleSelectionPT(pt.name)" />
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div id="map"></div>
-    </div>
+                <td>{{pt.description}}</td>
+                <td>
+                    <input type="radio"name="selectObject" :checked="selectedPT === pt.name" @click="toggleSelectionPT(pt.name)" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <!-- Package Type Actions with no object selected-->
+    <div v-if="!PT || PT==''" class="ActionContainer">
+        <h2>Actions</h2>
+        <input type="text" maxlength="15" placeholder="Name" v-model="ptNewName">
+        <br><br>
+        <textarea cols="50" rows="5" maxlength="225" placeholder="Description" v-model="ptNewDescription"></textarea>
+        <br><br>
+        <button id="add" class="btn" @click="addPT">Add</button>
 
-    <!-- Package Type Actions -->
-    <div class="ActionContainer">
+        
+    </div>
+    <!-- Package Type Actions with an object selected-->
+    <div v-else class="ActionContainer">
         <h2>Actions</h2>
         <p v-if="PT.name">Packagetype: {{PT.name}}</p>
 
-        <input v-if="!PT || PT==''" type="text" maxlength="15" placeholder="Name" v-model="ptNewName">
-        <input v-else readonly type="text" maxlength="15" placeholder="Name" v-model="ptNewName">
+        <input readonly type="text" maxlength="15" placeholder="Name" v-model="ptNewName">
 
         <br><br>
         <textarea cols="50" rows="5" maxlength="225" placeholder="Description" v-model="ptNewDescription"></textarea>
         <br><br>
-        <button v-if="!PT || PT==''" id="add" class="btn" @click="addPT">Add</button>
         <button class="btn" id="delete" @click="deletePT(PT.name)">Delete</button>
         <button id="update" class="btn" @click="updatePT">Update packagetype</button>
+
+        
     </div>
+
+    <div id="map"></div>
+
 </div>
 
 <!-- Scripts -->

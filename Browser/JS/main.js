@@ -8,7 +8,11 @@ const SortShelfPTDesc='sortShelfPTDesc'
 const SortShelfNumberAsc='sortShelfNumberAsc'
 const SortShelfNumberDesc='sortShelfNumberDesc'
 
+const FilterPt='filterPt'
+const FilterStatus ='filterStatus'
+
 var sortBy =''
+var filterBy=''
 
 
 const app = Vue.createApp({
@@ -25,7 +29,8 @@ const app = Vue.createApp({
             ptNewName: [],
             selectedShelf:null,
             selectedPT:null,
-            chosenStatus:''
+            chosenStatus:'all',
+            chosenPt:'all'
         }
     },
     methods: {
@@ -37,6 +42,8 @@ const app = Vue.createApp({
                     console.log(response.data);
                     this.shelfInDB = response.data;
                     this.showShelfList = this.shelfInDB;
+                    this.filterShelf()
+                    this.sortShelf()
                 })
                 .catch(error => { console.log(error); });
         },
@@ -149,11 +156,23 @@ const app = Vue.createApp({
         },
         //Filtrering af shelf (Bind: ptNewName)
         filterPt(){
-
+            filterBy='filterPt'
+            console.log(this.chosenPt)
+            if(this.chosenPt!='all'){
+                this.showShelfList = this.showShelfList.filter(s=>s.packageTypeName==this.chosenPt)
+            }
         },
         filterStatus(){
+            filterBy=FilterStatus
+            console.log(this.chosenStatus)
 
+            if(this.chosenStatus != "all") 
+            {
+                this.showShelfList = this.showShelfList.filter(s=>s.isStocked==this.chosenStatus)
+            }
+            console.log(this.showShelfList)
         },
+
         //Sortering af Shelf
         sortShelfPTAsc(){
             sortBy=SortShelfPTAsc
@@ -193,7 +212,6 @@ const app = Vue.createApp({
             this.showShelfList.sort((shelf1, shelf2) => shelf2.id - shelf1.id)
         },
         sortShelf(){
-            
             if(sortBy==SortShelfPTAsc)
             {
                 this.sortShelfPTAsc()
@@ -211,6 +229,11 @@ const app = Vue.createApp({
                 this.sortShelfNumberDesc()
             }
         },
+        filterShelf(){
+            this.showShelfList = this.shelfInDB
+            this.filterStatus()
+            this.filterPt()
+        }
     },
 
         // ✅ Auto-load on page load + auto-refresh every 10 seconds
@@ -224,11 +247,12 @@ const app = Vue.createApp({
         this.shelfTimer1 = setInterval(() => {
             this.getAllPT();
             this.getAllShelf();
-        }, 10000);
+        }, 1000);
         // Refresh sort every 10 miliseconds
         this.shelfTimer2 = setInterval(() => {
-            this.sortShelf();
-        }, 10);
+            this.filterShelf()
+            this.sortShelf()
+        }, 100);
 
         // Refresh package types every 10 seconds
         /*this.ptTimer = setInterval(() => {
