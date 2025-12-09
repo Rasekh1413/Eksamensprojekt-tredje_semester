@@ -115,6 +115,13 @@ farve og musen bliver en pointer*/
     border-spacing: 0;
 }
 
+.DashboardPt{
+    width: 75%;
+    margin-top: 10px;
+    font-family: Arial, sans-serif;
+    border-spacing: 0;
+}
+
 /*Gør så de 2 div'tags placeres vedsiden af hinanden*/
 .float-container{
   display: flex;
