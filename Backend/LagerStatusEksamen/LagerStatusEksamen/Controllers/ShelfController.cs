@@ -85,6 +85,19 @@ namespace LagerStatusEksamen.Controllers
             var result = _db.UpdatePackageType(mac, type);
             return Ok(result);
         }
+        // PUT api/<ShelfController>/5
+        [HttpPut("{mac}")]//This Put only updates the PackageType to null
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<Shelf> PutNull(string mac)
+        {
+            Shelf? shelf = _db.GetByMAC(mac);
+
+            if (shelf == null) return NotFound();
+
+            var result = _db.UpdatePackageType(mac, null);
+            return Ok(result);
+        }
 
         // DELETE api/<ShelfController>/5
         [HttpDelete("{mac}")]

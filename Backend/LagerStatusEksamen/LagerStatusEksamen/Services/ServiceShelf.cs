@@ -12,7 +12,6 @@ namespace LagerStatusEksamen.Services
         private string selectSql = "SELECT * FROM Shelves";
         private string filterBySensorSql = "SELECT * FROM Shelves WHERE MAC = @MAC";
         private string deleteSql = "DELETE FROM Shelves WHERE MAC = @MAC";
-        private string updatePackageSql = "UPDATE Shelves SET PackageTypeName = @PackageTypeName WHERE MAC = @MAC";
         private string updateStatusSql = "UPDATE Shelves SET IsStocked = @IsStocked WHERE MAC = @MAC";
         private string _con;
         #endregion
@@ -135,13 +134,21 @@ namespace LagerStatusEksamen.Services
         {
             using(SqlConnection connection = new SqlConnection(Secret.ConnectionString))
             {
+                // error occurs when FK is null
+                bool isNull = type == null;
+                string packageTypeName = isNull ? "null" : "@PackageTypeName";
+                string updatePackageSql = $"UPDATE Shelves SET PackageTypeName = {packageTypeName} WHERE MAC = @MAC";
+
                 Shelf? shelf = GetByMAC(mac);
                 if (shelf == null) { return null; }
                 try
                 {
                     SqlCommand command = new SqlCommand(updatePackageSql, connection);
                     command.Parameters.AddWithValue("@MAC", mac);
-                    command.Parameters.AddWithValue("@PackageTypeName ", type);
+                    if (!isNull)
+                    {
+                        command.Parameters.AddWithValue("@PackageTypeName", type);
+                    }
                     connection.Open();
                     command.ExecuteNonQuery();
 

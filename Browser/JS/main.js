@@ -59,9 +59,18 @@ const app = Vue.createApp({
         UpdateShelfPackagtype(mac) {
             console.log("Er i metoden UpdateShelf");
             console.log(this.newptName);
-            axios.put(baseURLShelf + mac + '/' + this.newptName)
-                .then(response => { console.log(response); })
-                .catch(error => { console.log(error); });
+            if (this.newptName != null)
+            {
+                axios.put(baseURLShelf + mac + '/' + this.newptName)
+                    .then(response => { console.log(response); })
+                    .catch(error => { console.log(error); });
+            }
+            else
+            {
+                axios.put(baseURLShelf + mac)
+                    .then(response => { console.log(response); })
+                    .catch(error => { console.log(error); });
+            }
             this.getAllShelf();
         },
 
