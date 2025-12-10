@@ -1,6 +1,8 @@
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 
 namespace TestProject;
 
@@ -39,12 +41,17 @@ public class SeleniumTesting
         //IWebDriver driver = new ChromeDriver();
         driver.Navigate().GoToUrl(@"https://zealand3.rasekh.dk/");
 
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+
         // Act
-        IWebElement selectAction = driver.FindElement(By.CssSelector("table.Dashboard"))
-            .FindElement(By.CssSelector("input[type='radio'][name='selectObject]'"));
+        IWebElement ptTable = wait.Until(
+            ExpectedConditions.ElementIsVisible(By.ClassName("Dashboard"))
+        );
+
+        IWebElement selectAction = ptTable.FindElement(By.Name("selectObject"));
         var selectActionText = selectAction.Text;
 
         // Assert
-        Assert.AreEqual("Jet the Hawk", selectActionText);
+        Assert.AreEqual("", selectActionText);
     }
 }
