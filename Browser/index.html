@@ -36,7 +36,7 @@
     <input type="radio" name="selectObject"  @click="sortShelfNumberDesc" /> Decending
     <br>
     <br>
-    <label><b>Chose a stock status:  </b></label>
+    <label><b>Choose a stock status:  </b></label>
     <select name="allStock" id="pt" v-model="chosenStatus" @click="filterStatus">
         <option value="all">All</option>
         <option  :value="true">Full</option>
@@ -65,7 +65,9 @@
             <td>{{shelf.id}}</td>
             <td v-if="shelf.isStocked" style="color:green"><b>Filled</b></td>
             <td v-else style="color:red;background-color: rgb(245, 169, 169);"><em><b>Low inventory</b></em></td>
-            <td>{{shelf.packageTypeName}}</td>
+            <td v-if="shelf.packageTypeName != null">{{shelf.packageTypeName}}</td>
+            <td v-else>N/A</td>
+            </td>
             <td>{{shelf.mac}}</td>
             <td>
                 <input type="radio"
@@ -80,10 +82,12 @@
     <!-- Shelf Actions -->
     <div v-if="shelf" class="ActionContainer">
         <h2>Actions</h2>
-        <p>Shelf: {{shelf.id}} <br>Info: {{shelf.packageTypeName}}, {{shelf.isStocked}}, {{shelf.mac}}</p>
+        <p v-if="shelf.packageTypeName != null">Shelf: {{shelf.id}} <br>Info: {{shelf.packageTypeName}}, {{shelf.isStocked}}, {{shelf.mac}}</p>
+        <p v-else>Shelf: {{shelf.id}} <br>Info: {{shelf.isStocked}}, {{shelf.mac}}</p>
 
         <label for="pt">Choose a package type:</label>
         <select name="allPt" id="pt" v-model="newptName">
+            <option :value="null">Unassigned</option>
             <option v-for="pt in showPTList" :key="pt.name" :value="pt.name">{{pt.name}}</option>
         </select><br>
 
@@ -130,7 +134,6 @@
     <!-- Package Type Actions with an object selected-->
     <div v-else class="ActionContainer">
         <h2>Actions</h2>
-        <p v-if="PT.name">Packagetype: {{PT.name}}</p>
 
         <input readonly type="text" maxlength="15" placeholder="Name" v-model="ptNewName">
 
