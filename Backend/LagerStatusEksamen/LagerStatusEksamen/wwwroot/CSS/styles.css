@@ -1,0 +1,137 @@
+h1 {
+  color: #000000;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+#map { 
+    height: 300px;
+    width: 200px; 
+    padding-left: 250px;
+    /*Gør så map og PtDashbord er i samme højde*/
+    margin-top: 70px;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+#app{
+    padding:15px;
+    
+}
+
+.alert{
+  color:red
+}
+
+/*Style af knapper*/
+.btn{
+  border-radius: 10px;
+  padding:4px;
+  padding-left:7px;
+  padding-right:7px;
+}
+
+#delete{
+  background-color: rgb(220, 80, 80);
+  border-color: red;
+}
+
+#add{
+  background-color: green;
+  border-color: green;
+}
+
+#update{
+  background-color: rgb(240, 175, 54);
+  border-color: orange;
+}
+
+input:checked {accent-color: rgb(33, 141, 191); background-color: rgb(255, 255, 255);}
+
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: #03787c;
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #0a6164;
+  
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #0a6164;
+  color: white;
+  font-size: 25px;
+}
+
+/*Style af elementerne i en tabel*/
+
+thead {
+  background-color:#03999e;
+  color: rgb(255, 255, 255);
+}
+
+th, td {
+  padding: 13px;
+  text-align: left;
+  border: 1px solid#071212;
+  width: 30px;
+}
+
+/*De lige rækker(2,4,6 ect.) i de to tabeler, farves lysegrå*/
+.Dashboard tbody tr:nth-child(even),
+.DashboardPT tbody tr:nth-child(even){
+  background-color: rgb(221, 218, 218);
+}
+
+/*Når musen hover over en række i tabelen, skifter den 
+farve og musen bliver en pointer*/
+.Dashboard tbody tr:hover,.DashboardPT tbody tr:hover{
+  background-color:rgb(230, 255, 138) ;
+  cursor: pointer;
+}
+
+/*Style af tabeller (dashboard)*/
+.Dashboard{
+    width: 75%;
+    margin-top: 10px;
+    font-family: Arial, sans-serif;
+    border-spacing: 0;
+}
+
+/*Gør så de 2 div'tags placeres vedsiden af hinanden*/
+.float-container{
+  display: flex;
+  align-items: stretch;
+}
+
+.float-child{
+    width: 45%;
+    float: left;
+}
+.ActionContainer{
+  display: flexbox;
+  border: 2px solid orange;
+  background-color: rgb(241, 206, 141);
+  padding:10px;
+  padding-top:0 px;
+  align-items: center;
+  width:60%;
+  border-radius:10px;
+}

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <!---Import styles-->
+    <link rel="stylesheet" href="./CSS/styles.css"/>
+
+    <!--Import Leaflet CSS-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+
+    <!--Import Vue-->
+    <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
+    <!--Import Axios-->
+    <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+</head>
+<body>
+<div class="topnav">
+    <a class="active" href="#home">FunToys: Lager</a>
+    <a href="/swagger/index.html"><img src="/swagger/favicon-32x32.png"> Swagger UI</a>
+</div>
+
+<div id="app">
+    <!-- Shelves Table -->
+    <p> <b>Sort by packagetype:</b></p>
+    <input type="radio" name="selectObject"  @click="sortShelfPTAsc" /> A-Z<br>
+    <input type="radio" name="selectObject"  @click="sortShelfPTDesc" /> Z-A
+
+
+    <p> <b>Sort by shelf id:</b></p>
+    <input type="radio" name="selectObject"  @click="sortShelfNumberAsc" /> Acending<br>
+    <input type="radio" name="selectObject"  @click="sortShelfNumberDesc" /> Decending
+    <br>
+    <br>
+    <label><b>Choose a stock status:  </b></label>
+    <select name="allStock" id="pt" v-model="chosenStatus" @click="filterStatus">
+        <option value="all">All</option>
+        <option  :value="true">Full</option>
+        <option  :value="false">Low</option>
+    </select><br>
+    <label for="pt"><b>Choose a package type:  </b></label>
+
+    <select name="allPt" id="pt" v-model="chosenPt" @click="filterPt">
+        <option value="all">All</option>
+        <option :value="null">Unassigned</option>
+        <option v-for="pt in showPTList" :key="pt.name" :value="pt.name">{{pt.name}}</option>
+    </select><br>
+
+    <table class="Dashboard">
+        <thead>
+        <tr>
+            <th>Shelf number</th>
+            <th>Stock status</th>
+            <th>Package type</th>
+            <th>M.A.C</th>
+            <th>Select</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="shelf in showShelfList" :key="shelf.id">
+            <td>{{shelf.id}}</td>
+            <td v-if="shelf.isStocked" style="color:green"><b>Filled</b></td>
+            <td v-else style="color:red;background-color: rgb(245, 169, 169);"><em><b>Low inventory</b></em></td>
+            <td v-if="shelf.packageTypeName != null">{{shelf.packageTypeName}}</td>
+            <td v-else>N/A</td>
+            </td>
+            <td>{{shelf.mac}}</td>
+            <td>
+                <input type="radio"
+               name="selectObject"
+               :checked="selectedShelf === shelf.mac"
+               @click="toggleSelectionShelf(shelf.mac)" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <!-- Shelf Actions -->
+    <div v-if="shelf" class="ActionContainer">
+        <h2>Actions</h2>
+        <p v-if="shelf.packageTypeName != null">Shelf: {{shelf.id}} <br>Info: {{shelf.packageTypeName}}, {{shelf.isStocked}}, {{shelf.mac}}</p>
+        <p v-else>Shelf: {{shelf.id}} <br>Info: {{shelf.isStocked}}, {{shelf.mac}}</p>
+
+        <label for="pt">Choose a package type:</label>
+        <select name="allPt" id="pt" v-model="newptName">
+            <option :value="null">Unassigned</option>
+            <option v-for="pt in showPTList" :key="pt.name" :value="pt.name">{{pt.name}}</option>
+        </select><br>
+
+        <button class="btn" id="delete" @click="deleteShelf(shelf.mac)">Delete</button>
+        <button id="update" class="btn" @click="UpdateShelfPackagtype(shelf.mac)">Update packagetype</button>
+    </div>
+    <div v-else class="ActionContainer">
+        <h2>Actions</h2>
+        <p>Select an item from the dashboard to access the actions</p>
+    </div>
+
+    <!-- Package Types Table -->        
+        <h1>Package types</h1>
+        <table class="Dashboard">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="pt in showPTList" :key="pt.name">
+                    <td>{{pt.name}}</td>
+                <td>{{pt.description}}</td>
+                <td>
+                    <input type="radio"name="selectObject" :checked="selectedPT === pt.name" @click="toggleSelectionPT(pt.name)" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <!-- Package Type Actions with no object selected-->
+    <div v-if="!PT || PT==''" class="ActionContainer">
+        <h2>Actions</h2>
+        <input type="text" maxlength="15" placeholder="Name" v-model="ptNewName">
+        <br><br>
+        <textarea cols="50" rows="5" maxlength="225" placeholder="Description" v-model="ptNewDescription"></textarea>
+        <br><br>
+        <button id="add" class="btn" @click="addPT">Add</button>
+
+        
+    </div>
+    <!-- Package Type Actions with an object selected-->
+    <div v-else class="ActionContainer">
+        <h2>Actions</h2>
+
+        <input readonly type="text" maxlength="15" placeholder="Name" v-model="ptNewName">
+
+        <br><br>
+        <textarea cols="50" rows="5" maxlength="225" placeholder="Description" v-model="ptNewDescription"></textarea>
+        <br><br>
+        <button class="btn" id="delete" @click="deletePT(PT.name)">Delete</button>
+        <button id="update" class="btn" @click="updatePT">Update packagetype</button>
+
+        
+    </div>
+
+    <div id="map"></div>
+
+</div>
+
+<!-- Scripts -->
+<script src="JS/main.js"></script>
+<script src="JS/map.js"></script>
+</body>
+</html>

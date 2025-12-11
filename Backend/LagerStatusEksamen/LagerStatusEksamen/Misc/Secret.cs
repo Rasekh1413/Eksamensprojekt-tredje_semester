@@ -14,17 +14,7 @@ namespace LagerStatusEksamen
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
             IConfiguration config = builder.Build();
-            ConnectionString = config.GetConnectionString("ServerDB");
+            ConnectionString = config.GetConnectionString("LocalDB"); // change to ServerDB or LocalDB.
         }
     }
 }
-
-
-//namespace LagerStatusEksamen
-//{
-//    public class Secret
-//    {
-//        public static string ConnectionString { get { return _connectionString; } }
-//        private static string _connectionString = @"Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=LagerStatusDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
-//    }
-//}

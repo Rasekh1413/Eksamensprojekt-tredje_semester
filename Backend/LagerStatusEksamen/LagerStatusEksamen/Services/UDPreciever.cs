@@ -13,7 +13,7 @@ namespace LagerStatusEksamen.Services
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IServiceShelf _db;
         private readonly int _port = 55010;
-        private readonly string _serverUrl = "http://localhost:5155/api/shelves";
+        private readonly string _serverUrl = "api/shelves";
 
 
         public UDPreciever(IHttpClientFactory httpClientFactory, IServiceShelf db)
