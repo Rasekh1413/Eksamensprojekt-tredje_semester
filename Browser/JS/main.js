@@ -245,7 +245,7 @@ const app = Vue.createApp({
         }
     },
 
-        // ✅ Auto-load on page load + auto-refresh every 10 seconds
+        // Auto-load on page load + auto-refresh every 10 seconds
         mounted() {
         // Load immediately when the page loads
         this.getAllShelf();
